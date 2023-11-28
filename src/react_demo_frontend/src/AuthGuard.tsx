@@ -45,8 +45,8 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     }
   }, [address, identityAddress, setSession, clearIdentity]);
 
-  // If there is no session, show the login page.
-  if (!session) {
+  // If wallet is not connected or there is no session, show the login page.
+  if (!isConnected || !session) {
     return <LoginPage />;
   }
 

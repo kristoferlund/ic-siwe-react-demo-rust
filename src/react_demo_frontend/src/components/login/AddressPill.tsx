@@ -9,7 +9,7 @@ export default function AddressPill() {
   if (!address) return null;
 
   return (
-    <Pill>
+    <Pill className="justify-center w-44">
       <FontAwesomeIcon className="w-3 h-3" icon={faEthereum} />
       {address?.slice(0, 6) + "..." + address?.slice(-4)}
     </Pill>
