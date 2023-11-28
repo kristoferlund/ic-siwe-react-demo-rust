@@ -61,7 +61,7 @@ export default function IdentityButton() {
       spin={isCreatingIdentity}
     >
       {!isCreatingIdentity && (
-        <img alt="ic" className="w-4 h-4 inline-block mr-1" src="/ic.svg" />
+        <img alt="ic" className="inline-block w-4 h-4 mr-1" src="/ic.svg" />
       )}
       {text}
     </Button>

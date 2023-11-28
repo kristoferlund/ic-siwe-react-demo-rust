@@ -27,7 +27,7 @@ export default function SessionDialog({
   return (
     <Dialog className="max-w-sm" isOpen={isOpen} setIsOpen={setIsOpen}>
       <HeadlessDialog.Title>Session</HeadlessDialog.Title>
-      <div className="text-zinc-400 px-4 py-2 text-xs rounded-lg bg-zinc-900/50">
+      <div className="px-4 py-2 text-xs rounded-lg text-zinc-400 bg-zinc-900/50">
         <pre>
           Created: {createdAt.toLocaleDateString()}{" "}
           {createdAt.toLocaleTimeString()}
@@ -36,7 +36,7 @@ export default function SessionDialog({
           {expiresAt.toLocaleTimeString()}
         </pre>
       </div>
-      <div className="flex w-full justify-center gap-5">
+      <div className="flex justify-center w-full gap-5">
         <Button onClick={() => setIsOpen(false)} variant="outline">
           Close
         </Button>

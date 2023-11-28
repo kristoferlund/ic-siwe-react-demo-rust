@@ -20,7 +20,7 @@ export default function IdentityButton() {
       <Button onClick={() => setIsOpen(true)} variant="dark">
         <img
           alt="Internet Computer"
-          className="w-4 h-4 inline-block mr-1"
+          className="inline-block w-4 h-4 mr-1"
           src="/ic.svg"
         />
         {principal}

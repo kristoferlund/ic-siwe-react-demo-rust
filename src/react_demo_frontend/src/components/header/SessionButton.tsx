@@ -17,7 +17,7 @@ export default function SessionButton() {
   return (
     <>
       <Button
-        className="rounded-full w-10 h-10"
+        className="w-10 h-10 rounded-full"
         icon={faUser}
         onClick={() => setIsOpen(true)}
         variant="dark"

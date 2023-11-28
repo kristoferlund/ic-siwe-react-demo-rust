@@ -26,14 +26,14 @@ export default function PrincipalDialog({
     <Dialog className="max-w-lg" isOpen={isOpen} setIsOpen={setIsOpen}>
       <img
         alt="Internet Computer"
-        className="w-12 h-12 inline-block"
+        className="inline-block w-12 h-12"
         src="/ic.svg"
       />
       <HeadlessDialog.Title>Internet Computer Identity</HeadlessDialog.Title>
-      <div className="text-zinc-400 px-4 py-2 text-xs rounded-lg bg-zinc-900/50">
+      <div className="px-4 py-2 text-xs rounded-lg text-zinc-400 bg-zinc-900/50">
         <pre>{identity?.getPrincipal().toString()}</pre>
       </div>
-      <div className="flex w-full justify-center gap-5">
+      <div className="flex justify-center w-full gap-5">
         <Button onClick={() => setIsOpen(false)} variant="outline">
           Close
         </Button>

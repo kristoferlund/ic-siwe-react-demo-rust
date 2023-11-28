@@ -46,12 +46,12 @@ export default function Dialog({
           <div className="absolute right-5 top-5">
             <button onClick={() => setIsOpen(false)}>
               <FontAwesomeIcon
-                className="w-3 h-3 p-2 rounded-full border border-zinc-500/50 bg-transparent hover:scale-105 text-zinc-500 hover:bg-emerald-500/10 hover:text-zinc-200"
+                className="w-3 h-3 p-2 bg-transparent border rounded-full border-zinc-500/50 hover:scale-105 text-zinc-500 hover:bg-emerald-500/10 hover:text-zinc-200"
                 icon={faXmark}
               />
             </button>
           </div>
-          <div className="flex flex-col items-center gap-5 p-8 w-full">
+          <div className="flex flex-col items-center w-full p-8 gap-5">
             {children}
           </div>
         </HeadlessDialog.Panel>
