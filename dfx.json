@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "react_demo_backend": {
+      "candid": "src/react_demo_backend/react_demo_backend.did",
+      "package": "react_demo_backend",
+      "type": "rust"
+    },
+    "react_demo_frontend": {
+      "dependencies": ["react_demo_backend"],
+      "source": ["dist"],
+      "type": "assets",
+      "build": ["npm run build"]
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

@@ -1,0 +1,35 @@
+type BasicResponse = variant {
+  Ok : text;
+  Err : text;
+};
+
+type LoginResponse = variant {
+  Ok : Session;
+  Err : text;
+};
+
+type Session = record {
+  address : text;
+  created_at : nat64;
+  max_age : nat64;
+};
+
+type Error = record {
+  message : text;
+  status : nat16;
+  status_text : text;
+};
+
+type ListActiveSessionsResponse = variant {
+  Ok : vec Session;
+  Err : Error;
+};
+
+service : {
+  "create_identity_message" : (address : text) -> (BasicResponse);
+  "create_siwe_message" : (text) -> (BasicResponse);
+  "login" : (text, text) -> (LoginResponse);
+  "logout" : () -> (BasicResponse);
+  "list_active_sessions" : () -> (ListActiveSessionsResponse);
+  "greet" : (text) -> (text) query;
+};
