@@ -1,14 +1,16 @@
-import { useAccount, useSignMessage } from "wagmi";
+import { useAccount, useNetwork, useSignMessage } from "wagmi";
 import { useEffect, useState } from "react";
 
 import Button from "../ui/Button";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
 import { useIdentity } from "ic-eth-identity";
 
 export default function IdentityButton() {
   const { address, isConnected } = useAccount();
   const { signMessage, data: signature, isError } = useSignMessage();
   const { createMessage, create: createIdentity } = useIdentity();
+  const { chain } = useNetwork();
 
   // Local state
   const [isCreatingIdentity, setIsCreatingIdentity] = useState(false);
@@ -45,7 +47,8 @@ export default function IdentityButton() {
 
   const text = isCreatingIdentity ? "Creating identity" : "Create identity";
 
-  const disabled = isCreatingIdentity || !isConnected;
+  const disabled =
+    isCreatingIdentity || !isConnected || !isChainIdSupported(chain?.id);
 
   const icon = isCreatingIdentity ? faCircleNotch : undefined;
 
