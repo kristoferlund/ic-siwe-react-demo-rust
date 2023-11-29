@@ -10,5 +10,5 @@ export type SessionContextType = {
   isError: boolean;
   actor?: ActorSubclass<_SERVICE>;
   logout: () => Promise<void>;
-  handleErrors: <T>(fn: () => Promise<T>) => Promise<T>;
+  handleErrors: <T>(fn: () => Promise<T>) => Promise<T | undefined>;
 };

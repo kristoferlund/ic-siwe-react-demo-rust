@@ -11,6 +11,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { WagmiConfig } from "wagmi";
 import { SessionProvider } from "./ic/SessionProvider.tsx";
+import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <SessionProvider>
             <AuthGuard>
               <App />
+              <Toaster />
             </AuthGuard>
           </SessionProvider>
         </IdentityProvider>

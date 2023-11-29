@@ -2,13 +2,13 @@ import { useAccount, useNetwork } from "wagmi";
 
 import LoginPage from "./components/login/LoginPage";
 import { isChainIdSupported } from "./wagmi/is-chain-id-supported";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useGlobalState } from "./state";
 import { useIdentity } from "ic-eth-identity";
 import { useSession } from "./ic/useSession";
 
 type AuthGuardProps = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 export default function AuthGuard({ children }: AuthGuardProps) {

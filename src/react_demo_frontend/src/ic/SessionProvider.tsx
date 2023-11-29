@@ -104,16 +104,20 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  async function handleErrors<T>(fn: () => Promise<T>): Promise<T> {
-    const response = await fn();
-    if (isErrorResponse(response)) {
-      console.error(response.Err);
-      if (response.Err.status === 401) {
-        logout();
+  async function handleErrors<T>(fn: () => Promise<T>): Promise<T | undefined> {
+    try {
+      const response = await fn();
+      if (isErrorResponse(response)) {
+        console.error(response.Err);
+        if (response.Err.status === 401) {
+          logout();
+        }
       }
+      return response;
+    } catch (err) {
+      console.error(err);
+      return;
     }
-
-    return response;
   }
 
   return (

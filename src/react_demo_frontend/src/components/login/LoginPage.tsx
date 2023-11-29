@@ -26,7 +26,7 @@ export default function LoginPage(): React.ReactElement {
         Internet Computer + React + Sign In With Ethereum
       </div>
       <div className="w-full max-w-sm border-zinc-700/50 border-[1px] bg-zinc-900 px-5 drop-shadow-xl rounded-3xl flex flex-col items-center py-5 mt-8">
-        <div className="flex flex-col items-center w-full gap-10 p-8">
+        <div className="flex flex-col items-center w-full p-8 gap-10">
           <div className="flex items-center justify-center w-full gap-5">
             <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
               1

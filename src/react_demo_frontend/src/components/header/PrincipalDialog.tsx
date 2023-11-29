@@ -23,7 +23,7 @@ export default function PrincipalDialog({
   if (!session) return null;
 
   return (
-    <Dialog className="max-w-lg" isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Dialog className="max-w-xl" isOpen={isOpen} setIsOpen={setIsOpen}>
       <img
         alt="Internet Computer"
         className="inline-block w-12 h-12"

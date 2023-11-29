@@ -2,7 +2,7 @@ use candid::{CandidType, Decode, Deserialize, Encode};
 use ic_stable_structures::{storable::Bound, Storable};
 use std::borrow::Cow;
 
-const MAX_VALUE_SIZE: u32 = 100;
+const MAX_VALUE_SIZE: u32 = 500;
 
 #[derive(CandidType, Deserialize)]
 pub struct UserProfile {

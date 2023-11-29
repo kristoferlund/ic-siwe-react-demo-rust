@@ -26,7 +26,7 @@ thread_local! {
     static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> =
         RefCell::new(MemoryManager::init(DefaultMemoryImpl::default()));
 
-    static MAP: RefCell<StableBTreeMap<String, UserProfile, Memory>> = RefCell::new(
+    static USER_PROFILES: RefCell<StableBTreeMap<String, UserProfile, Memory>> = RefCell::new(
         StableBTreeMap::init(
             MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(0))),
         )
@@ -46,13 +46,15 @@ fn get_my_profile() -> Result<UserProfile, Error> {
     let session = session::get(ic_cdk::caller())
         .map_err(|e| Error::new(e.to_string(), ErrorStatus::BadRequest))?;
 
-    MAP.with(|p| p.borrow().get(&session.address)).map_or(
-        Err(Error::new(
-            "No profile found for the given address".to_string(),
-            ErrorStatus::NotFound,
-        )),
-        |p| Ok(p),
-    )
+    USER_PROFILES
+        .with(|p| p.borrow().get(&session.address))
+        .map_or(
+            Err(Error::new(
+                "No profile found for the given address".to_string(),
+                ErrorStatus::NotFound,
+            )),
+            |p| Ok(p),
+        )
 }
 
 #[update]
@@ -62,7 +64,7 @@ fn save_my_profile(profile: UserProfile) -> Result<String, Error> {
     let session = session::get(ic_cdk::caller())
         .map_err(|e| Error::new(e.to_string(), ErrorStatus::BadRequest))?;
 
-    MAP.with(|p| p.borrow_mut().insert(session.address, profile));
+    USER_PROFILES.with(|p| p.borrow_mut().insert(session.address, profile));
 
     Ok("Profile saved".to_string())
 }
@@ -71,7 +73,7 @@ fn save_my_profile(profile: UserProfile) -> Result<String, Error> {
 fn list_profiles() -> Result<Vec<(String, UserProfile)>, Error> {
     with_valid_session!()?;
 
-    let profiles = MAP.with(|p| p.borrow().iter().collect::<Vec<_>>());
+    let profiles = USER_PROFILES.with(|p| p.borrow().iter().collect::<Vec<_>>());
 
     Ok(profiles)
 }

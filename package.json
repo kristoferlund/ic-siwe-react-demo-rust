@@ -34,6 +34,7 @@
     "ic-eth-identity": "file:../ic-eth-identity",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.0.0",
     "viem": "^1.19.8",
     "wagmi": "^1.4.7"
