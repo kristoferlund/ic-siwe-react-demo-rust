@@ -10,6 +10,7 @@ import { IdentityProvider } from "ic-eth-identity";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { WagmiConfig } from "wagmi";
+import { SessionProvider } from "./ic/SessionProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -25,9 +26,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         })}
       >
         <IdentityProvider>
-          <AuthGuard>
-            <App />
-          </AuthGuard>
+          <SessionProvider>
+            <AuthGuard>
+              <App />
+            </AuthGuard>
+          </SessionProvider>
         </IdentityProvider>
       </RainbowKitProvider>
     </WagmiConfig>

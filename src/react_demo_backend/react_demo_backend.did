@@ -1,10 +1,36 @@
-type BasicResponse = variant {
-  Ok : text;
-  Err : text;
+type Error = record {
+  message : text;
+  status : nat16;
+  status_text : text;
 };
 
-type LoginResponse = variant {
-  Ok : Session;
+type UserProfile = record {
+  name : text;
+  avatar_url : text;
+};
+
+type GetMyProfileResponse = variant {
+  Ok : UserProfile;
+  Err : Error;
+};
+
+type SaveMyProfileResponse = variant {
+  Ok : text;
+  Err : Error;
+};
+
+type ListProfilesResponse = variant {
+  Ok : vec record { text; UserProfile };
+  Err : Error;
+};
+
+type ListActiveSessionsResponse = variant {
+  Ok : vec Session;
+  Err : Error;
+};
+
+type BasicResponse = variant {
+  Ok : text;
   Err : text;
 };
 
@@ -14,22 +40,17 @@ type Session = record {
   max_age : nat64;
 };
 
-type Error = record {
-  message : text;
-  status : nat16;
-  status_text : text;
-};
-
-type ListActiveSessionsResponse = variant {
-  Ok : vec Session;
-  Err : Error;
+type LoginResponse = variant {
+  Ok : Session;
+  Err : text;
 };
 
 service : {
-  "create_identity_message" : (address : text) -> (BasicResponse);
+  "get_my_profile" : () -> (GetMyProfileResponse);
+  "save_my_profile" : (UserProfile) -> (SaveMyProfileResponse);
+  "list_profiles" : () -> (ListProfilesResponse);
+  "list_active_sessions" : () -> (ListActiveSessionsResponse);
   "create_siwe_message" : (text) -> (BasicResponse);
   "login" : (text, text) -> (LoginResponse);
   "logout" : () -> (BasicResponse);
-  "list_active_sessions" : () -> (ListActiveSessionsResponse);
-  "greet" : (text) -> (text) query;
 };
