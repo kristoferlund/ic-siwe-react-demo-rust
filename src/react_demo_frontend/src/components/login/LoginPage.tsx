@@ -1,17 +1,17 @@
 import { useAccount, useNetwork } from "wagmi";
 
-import AddressPill from "./AddressPill";
+import AddressPill from "../AddressPill";
 import Button from "../ui/Button";
 import ConnectButton from "./ConnectButton";
 import IdentityButton from "./IdentityButton";
 import LoginButton from "./LoginButton";
-import PrincipalPill from "./PrincipalPill";
+import PrincipalPill from "../PrincipalPill";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
 import { useIdentity } from "ic-eth-identity";
 
 export default function LoginPage(): React.ReactElement {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
   const { identity } = useIdentity();
 
@@ -33,7 +33,12 @@ export default function LoginPage(): React.ReactElement {
             </div>
             <div>
               {!isConnected && <ConnectButton />}
-              {isConnected && isChainIdSupported(chain?.id) && <AddressPill />}
+              {isConnected && isChainIdSupported(chain?.id) && (
+                <AddressPill
+                  address={address}
+                  className="justify-center w-44"
+                />
+              )}
               {isConnected && !isChainIdSupported(chain?.id) && (
                 <Button disabled icon={faWaveSquare} variant="outline">
                   Unsupported Network
@@ -45,7 +50,16 @@ export default function LoginPage(): React.ReactElement {
             <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
               2
             </div>
-            <div>{identity ? <PrincipalPill /> : <IdentityButton />}</div>
+            <div>
+              {identity ? (
+                <PrincipalPill
+                  className="justify-center w-44"
+                  principal={identity.getPrincipal().toString()}
+                />
+              ) : (
+                <IdentityButton />
+              )}
+            </div>
           </div>
           <div className="flex items-center justify-center w-full gap-5">
             <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
