@@ -3,17 +3,13 @@ import { useAccount, useNetwork } from "wagmi";
 import AddressPill from "../AddressPill";
 import Button from "../ui/Button";
 import ConnectButton from "./ConnectButton";
-import IdentityButton from "./IdentityButton";
 import LoginButton from "./LoginButton";
-import PrincipalPill from "../PrincipalPill";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
-import { useIdentity } from "ic-eth-identity";
 
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
-  const { identity } = useIdentity();
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen gap-10">
@@ -26,7 +22,7 @@ export default function LoginPage(): React.ReactElement {
         Internet Computer + React + Sign In With Ethereum
       </div>
       <div className="w-full max-w-sm border-zinc-700/50 border-[1px] bg-zinc-900 px-5 drop-shadow-xl rounded-3xl flex flex-col items-center py-5 mt-8">
-        <div className="flex flex-col items-center w-full p-8 gap-10">
+        <div className="flex flex-col items-center w-full gap-10 p-8">
           <div className="flex items-center justify-center w-full gap-5">
             <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
               1
@@ -49,21 +45,6 @@ export default function LoginPage(): React.ReactElement {
           <div className="flex items-center justify-center w-full gap-5">
             <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
               2
-            </div>
-            <div>
-              {identity ? (
-                <PrincipalPill
-                  className="justify-center w-44"
-                  principal={identity.getPrincipal().toString()}
-                />
-              ) : (
-                <IdentityButton />
-              )}
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-full gap-5">
-            <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
-              3
             </div>
             <div>
               {" "}

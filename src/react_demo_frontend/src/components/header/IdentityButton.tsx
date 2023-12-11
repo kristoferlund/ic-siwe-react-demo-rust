@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import PrincipalDialog from "./PrincipalDialog";
 import { useAccount } from "wagmi";
-import { useIdentity } from "ic-eth-identity";
+import { useIdentity } from "../../ic/useIdentity";
 import { useState } from "react";
 
 export default function IdentityButton() {
@@ -13,7 +13,7 @@ export default function IdentityButton() {
   if (!identity || !isConnected) return null;
 
   let principal = identity.getPrincipal().toString();
-  principal = principal.slice(0, 4) + "..." + principal.slice(-2);
+  principal = principal.slice(0, 6) + "..." + principal.slice(-4);
 
   return (
     <>

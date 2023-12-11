@@ -1,9 +1,10 @@
 import { FormEvent, useEffect, useState } from "react";
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { useSession } from "../../ic/useSession";
-import toast from "react-hot-toast";
+import { actorContext, useActor } from "../../main";
+
 import Button from "../ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 type EditProfileProps = {
   className?: string;
@@ -14,7 +15,7 @@ export default function EditProfile({
   className,
   allwaysShow,
 }: EditProfileProps) {
-  const { handleErrors, actor } = useSession();
+  const { actor } = useActor(actorContext);
 
   // Local state
   const [name, setName] = useState("");
@@ -25,8 +26,8 @@ export default function EditProfile({
 
   useEffect(() => {
     (async () => {
-      if (!handleErrors || !actor) return;
-      const response = await handleErrors(() => actor.get_my_profile());
+      if (!actor) return;
+      const response = await actor.get_my_profile();
       if (response && "Ok" in response) {
         setName(response.Ok.name);
         setAvatarUrl(response.Ok.avatar_url);
@@ -35,7 +36,7 @@ export default function EditProfile({
       }
       setLoading(false);
     })();
-  }, [handleErrors, actor]);
+  }, [actor]);
 
   // Don't render if we already have a profile unless allwaysShow is true
   if (hasProfile && !allwaysShow) return null;
@@ -51,14 +52,13 @@ export default function EditProfile({
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name || !avatarUrl) return;
-    if (!handleErrors || !actor) return;
+    if (!actor) return;
     setSaving(true);
-    const response = await handleErrors(() =>
-      actor.save_my_profile({
-        name,
-        avatar_url: avatarUrl,
-      })
-    );
+    const response = await actor.save_my_profile({
+      name,
+      avatar_url: avatarUrl,
+    });
+
     if (response && "Ok" in response) {
       toast.success("Profile saved");
     } else {

@@ -1,9 +1,7 @@
 import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { useGlobalState } from "../../state";
-import { useIdentity } from "ic-eth-identity";
-import { useSession } from "../../ic/useSession";
+import { useIdentity } from "../../ic/useIdentity";
 
 type SessionDialogProps = {
   isOpen: boolean;
@@ -14,13 +12,9 @@ export default function PrincipalDialog({
   isOpen,
   setIsOpen,
 }: SessionDialogProps) {
-  const { logout } = useSession();
-  const { identity } = useIdentity();
+  const { clear, identity } = useIdentity();
 
-  // Global state
-  const session = useGlobalState((state) => state.session);
-
-  if (!session) return null;
+  if (!identity) return null;
 
   return (
     <Dialog className="max-w-xl" isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -37,7 +31,7 @@ export default function PrincipalDialog({
         <Button onClick={() => setIsOpen(false)} variant="outline">
           Close
         </Button>
-        <Button onClick={logout}>Logout</Button>
+        <Button onClick={clear}>Logout</Button>
       </div>
     </Dialog>
   );

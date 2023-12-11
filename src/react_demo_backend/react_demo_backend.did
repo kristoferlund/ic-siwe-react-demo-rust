@@ -40,8 +40,37 @@ type Session = record {
   max_age : nat64;
 };
 
+type PublicKey = blob;
+type Timestamp = nat64;
+type Address = text;
+type SessionKey = PublicKey;
+type SiweSignature = text;
+type SiweMessage = text;
+type CanisterPublicKey = PublicKey;
+
+type PrepareLoginResponse = variant {
+  Ok : SiweMessage;
+  Err : text;
+};
+
 type LoginResponse = variant {
-  Ok : Session;
+  Ok : CanisterPublicKey;
+  Err : text;
+};
+
+type Delegation = record {
+  pubkey : PublicKey;
+  expiration : Timestamp;
+  targets : opt vec principal;
+};
+
+type SignedDelegation = record {
+  delegation : Delegation;
+  signature : blob;
+};
+
+type GetDelegationResponse = variant {
+  Ok : SignedDelegation;
   Err : text;
 };
 
@@ -50,7 +79,7 @@ service : {
   "save_my_profile" : (UserProfile) -> (SaveMyProfileResponse);
   "list_profiles" : () -> (ListProfilesResponse);
   "list_active_sessions" : () -> (ListActiveSessionsResponse);
-  "create_siwe_message" : (text) -> (BasicResponse);
-  "login" : (text, text) -> (LoginResponse);
-  "logout" : () -> (BasicResponse);
+  "prepare_login" : (Address) -> (PrepareLoginResponse);
+  "login" : (SiweSignature, Address, SessionKey) -> (LoginResponse);
+  "get_delegation" : (Address, SessionKey) -> (GetDelegationResponse) query;
 };

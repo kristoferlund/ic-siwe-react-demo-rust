@@ -2,7 +2,7 @@ import Button from "../ui/Button";
 import SessionDialog from "./SessionDialog";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAccount } from "wagmi";
-import { useIdentity } from "ic-eth-identity";
+import { useIdentity } from "../../ic/useIdentity";
 import { useState } from "react";
 
 export default function SessionButton() {
