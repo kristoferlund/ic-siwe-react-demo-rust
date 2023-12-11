@@ -5,6 +5,7 @@ type Error = record {
 };
 
 type UserProfile = record {
+  address : text;
   name : text;
   avatar_url : text;
 };
@@ -47,6 +48,8 @@ type SessionKey = PublicKey;
 type SiweSignature = text;
 type SiweMessage = text;
 type CanisterPublicKey = PublicKey;
+type Name = text;
+type AvatarUrl = text;
 
 type PrepareLoginResponse = variant {
   Ok : SiweMessage;
@@ -76,7 +79,7 @@ type GetDelegationResponse = variant {
 
 service : {
   "get_my_profile" : () -> (GetMyProfileResponse);
-  "save_my_profile" : (UserProfile) -> (SaveMyProfileResponse);
+  "save_my_profile" : (Name, AvatarUrl) -> (SaveMyProfileResponse);
   "list_profiles" : () -> (ListProfilesResponse);
   "list_active_sessions" : () -> (ListActiveSessionsResponse);
   "prepare_login" : (Address) -> (PrepareLoginResponse);

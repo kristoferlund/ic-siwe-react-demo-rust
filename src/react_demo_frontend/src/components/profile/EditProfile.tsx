@@ -54,10 +54,7 @@ export default function EditProfile({
     if (!name || !avatarUrl) return;
     if (!actor) return;
     setSaving(true);
-    const response = await actor.save_my_profile({
-      name,
-      avatar_url: avatarUrl,
-    });
+    const response = await actor.save_my_profile(name, avatarUrl);
 
     if (response && "Ok" in response) {
       toast.success("Profile saved");

@@ -31,12 +31,8 @@ export default function AllProfiles() {
             {loading && (
               <FontAwesomeIcon className="w-4 h-4" icon={faCircleNotch} spin />
             )}
-            {profiles.map((session) => (
-              <ProfileCard
-                address={session[0]}
-                key={session[0]}
-                profile={session[1]}
-              />
+            {profiles.map((p) => (
+              <ProfileCard key={p[0]} principal={p[0]} profile={p[1]} />
             ))}
           </div>
         </div>

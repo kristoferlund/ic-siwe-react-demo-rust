@@ -4,7 +4,7 @@ use std::borrow::Cow;
 
 const MAX_VALUE_SIZE: u32 = 500;
 
-#[derive(CandidType, Deserialize)]
+#[derive(CandidType, Deserialize, Debug, Clone)]
 pub struct UserProfile {
     pub address: String,
     pub name: String,

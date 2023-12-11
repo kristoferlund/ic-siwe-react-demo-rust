@@ -2,6 +2,7 @@
 
 mod user_profile;
 
+use candid::Principal;
 use ic_cdk::{init, post_upgrade, query, update};
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};
@@ -46,9 +47,25 @@ fn get_my_profile() -> Result<UserProfile, String> {
 }
 
 #[update(guard = profile_guard)]
-fn save_my_profile(profile: UserProfile) -> Result<String, String> {
-    USER_PROFILES.with(|p| p.borrow_mut().insert(ic_cdk::caller().to_string(), profile));
-    Ok("Profile saved".to_string())
+fn save_my_profile(name: String, avatar_url: String) -> Result<String, String> {
+    let caller = ic_cdk::caller().to_string();
+
+    USER_PROFILES.with(|p| {
+        let mut profiles = p.borrow_mut();
+
+        if profiles.contains_key(&caller) {
+            // Retrieve and update the profile
+            let mut profile = profiles.get(&caller).expect("Profile not found").clone();
+            profile.name = name;
+            profile.avatar_url = avatar_url;
+
+            // Re-insert the updated profile
+            profiles.insert(caller, profile);
+            Ok("Profile saved".to_string())
+        } else {
+            Err("Profile not found".to_string())
+        }
+    })
 }
 
 #[query(guard = profile_guard)]
@@ -64,7 +81,32 @@ fn prepare_login(address: String) -> Result<String, String> {
 
 #[update]
 fn login(signature: String, address: String, session_key: ByteBuf) -> Result<ByteBuf, String> {
-    ic_siwe::login(&signature, &address, session_key)
+    match ic_siwe::login(&signature, &address, session_key) {
+        Ok(pk) => {
+            // Convert the public key to a principal as this is the principal that will be used
+            // for authentication.
+            let principal = Principal::self_authenticating(&pk).to_string();
+
+            // Create a new user profile for the user if it doesn't exist yet.
+            USER_PROFILES.with(|p| {
+                let mut profiles = p.borrow_mut();
+
+                if !profiles.contains_key(&principal) {
+                    let profile = UserProfile {
+                        address,
+                        name: "No Name".to_string(),
+                        avatar_url: "".to_string(),
+                    };
+
+                    // Re-insert the updated profile
+                    profiles.insert(principal, profile);
+                }
+            });
+
+            Ok(pk.into())
+        }
+        Err(e) => Err(e.to_string()),
+    }
 }
 
 #[query]
@@ -72,23 +114,7 @@ fn get_delegation(
     address: String,
     session_key: ByteBuf,
 ) -> Result<ic_siwe::SignedDelegation, String> {
-    match ic_siwe::get_delegation(&address, session_key) {
-        Ok(signed_delegation) => {
-            // Create a new user profile for the user if it doesn't exist yet.
-            USER_PROFILES.with(|p| {
-                p.borrow_mut().insert(
-                    ic_cdk::caller().to_string(),
-                    UserProfile {
-                        address,
-                        name: "".to_string(),
-                        avatar_url: "".to_string(),
-                    },
-                )
-            });
-            Ok(signed_delegation)
-        }
-        Err(e) => Err(e.to_string()),
-    }
+    ic_siwe::get_delegation(&address, session_key)
 }
 
 fn siwe_init() {

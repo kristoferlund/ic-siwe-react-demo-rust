@@ -238,8 +238,7 @@ export function IdentityProvider({
           {
             delegation: new Delegation(
               signedDelegation.delegation.pubkey,
-              signedDelegation.delegation.expiration,
-              []
+              signedDelegation.delegation.expiration
             ),
             signature: asSignature(signedDelegation.signature),
           },
