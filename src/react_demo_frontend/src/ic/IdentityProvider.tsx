@@ -45,11 +45,12 @@ export function IdentityProvider({
   canisterId: string;
   children: ReactNode;
 }) {
-  const { signMessage, data, isError } = useSignMessage();
+  const { signMessage, data, isError, reset } = useSignMessage();
   const { address } = useAccount();
 
   // Local state
-  const [actor, setActor] = useState<ActorSubclass<SiweService>>();
+  const [anonymousActor, setAnonymousActor] =
+    useState<ActorSubclass<SiweService>>();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [identity, setIdentity] = useState<DelegationIdentity>();
@@ -89,9 +90,9 @@ export function IdentityProvider({
    * Initiates the login process by requesting a SIWE message from the backend.
    */
   function login() {
-    if (!actor || !address) return;
+    if (!anonymousActor || !address) return;
     setIsLoggingIn(true);
-    actor.prepare_login(address).then((response) => {
+    anonymousActor.prepare_login(address).then((response) => {
       if ("Ok" in response) {
         const siweMessage = response.Ok;
         signMessage({ message: siweMessage });
@@ -108,6 +109,8 @@ export function IdentityProvider({
    */
   function clear() {
     setIdentity(undefined);
+    setIdentityAddress(undefined);
+    setDelegationChain(undefined);
     localStorage.removeItem(STATE_STORAGE_KEY);
   }
 
@@ -140,7 +143,7 @@ export function IdentityProvider({
         });
       }
 
-      setActor(
+      setAnonymousActor(
         Actor.createActor<SiweService>(idlFactory, {
           agent,
           canisterId,
@@ -159,9 +162,9 @@ export function IdentityProvider({
       address: `0x${string}` | undefined,
       sessionPublicKey: DerEncodedPublicKey
     ) {
-      if (!actor || !data || !address) return;
+      if (!anonymousActor || !data || !address) return;
 
-      const loginReponse = await actor.login(
+      const loginReponse = await anonymousActor.login(
         data,
         address,
         new Uint8Array(sessionPublicKey)
@@ -180,9 +183,9 @@ export function IdentityProvider({
       address: `0x${string}` | undefined,
       sessionPublicKey: DerEncodedPublicKey
     ) {
-      if (!actor || !address) return;
+      if (!anonymousActor || !address) return;
 
-      const response = await actor.get_delegation(
+      const response = await anonymousActor.get_delegation(
         address,
         new Uint8Array(sessionPublicKey)
       );
@@ -268,13 +271,14 @@ export function IdentityProvider({
           })
         );
 
+        reset();
         setDelegationChain(delegationChain);
         setIdentity(identity);
         setIdentityAddress(address);
         setIsLoggingIn(false);
       }
     })();
-  }, [data, address, isLoggingIn, actor]);
+  }, [data, address, isLoggingIn, anonymousActor, reset]);
 
   /**
    * If an error occurs during the login process, stop the loading indicator.

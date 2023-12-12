@@ -68,6 +68,7 @@ export function ActorProvider<T>({
                   !isDelegationValid(delegationChain) // TODO: How does timezones affect this?
                 ) {
                   clear(); // Clears the identity from the state and local storage. Effectively "logs the user out".
+                  setActor(undefined); // Clears the actor from the state.
                 }
                 throw err; // Re-throw the error after handling
               }
