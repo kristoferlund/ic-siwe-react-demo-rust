@@ -10,6 +10,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 import { ActorContextType } from "./actor-context.type";
 import { IDL } from "@dfinity/candid";
+import { isDelegationValid } from "@dfinity/identity";
 import { useIdentity } from "./useIdentity";
 
 type AgentHTTPResponseError = {
@@ -46,7 +47,7 @@ export function ActorProvider<T>({
   children,
 }: ActorProviderProps<T>) {
   const [actor, setActor] = useState<ActorSubclass<typeof context>>();
-  const { identity, clear } = useIdentity();
+  const { delegationChain, identity, clear } = useIdentity();
 
   useEffect(() => {
     function createErrorHandlingProxy<T>(
@@ -61,10 +62,10 @@ export function ActorProvider<T>({
               try {
                 return await originalProperty.apply(this, args);
               } catch (err) {
-                // TODO: Improve error handling, how to best detect if a delegation is expired?
                 if (
                   ErrorIsAgentHTTPResponseError(err) &&
-                  err.response?.status === 403
+                  delegationChain &&
+                  !isDelegationValid(delegationChain) // TODO: How does timezones affect this?
                 ) {
                   clear(); // Clears the identity from the state and local storage. Effectively "logs the user out".
                 }
@@ -107,6 +108,7 @@ export function ActorProvider<T>({
     canisterId,
     context,
     clear,
+    delegationChain,
   ]);
 
   return (

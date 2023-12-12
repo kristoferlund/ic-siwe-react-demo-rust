@@ -53,6 +53,7 @@ export function IdentityProvider({
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [identity, setIdentity] = useState<DelegationIdentity>();
   const [identityAddress, setIdentityAddress] = useState<string>();
+  const [delegationChain, setDelegationChain] = useState<DelegationChain>();
 
   /**
    * Loads the identity from local storage.
@@ -263,6 +264,7 @@ export function IdentityProvider({
           })
         );
 
+        setDelegationChain(delegationChain);
         setIdentity(identity);
         setIdentityAddress(address);
         setIsLoggingIn(false);
@@ -286,6 +288,7 @@ export function IdentityProvider({
         clear,
         isLoggingIn,
         isError,
+        delegationChain,
         identity,
         identityAddress,
       }}

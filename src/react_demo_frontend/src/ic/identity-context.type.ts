@@ -1,4 +1,4 @@
-import { DelegationIdentity } from "@dfinity/identity";
+import { DelegationChain, DelegationIdentity } from "@dfinity/identity";
 
 export type IdentityContextType = {
   /**
@@ -13,6 +13,7 @@ export type IdentityContextType = {
   clear: () => void;
   isLoggingIn: boolean;
   isError: boolean;
+  delegationChain?: DelegationChain;
   identity?: DelegationIdentity;
   identityAddress?: string;
 };
