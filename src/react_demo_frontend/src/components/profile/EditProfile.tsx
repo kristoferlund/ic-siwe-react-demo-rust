@@ -59,7 +59,6 @@ export default function EditProfile({
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!name || !avatarUrl) return;
     if (!actor) return;
     setSaving(true);
     const response = await actor.save_my_profile(name, avatarUrl);
@@ -72,13 +71,11 @@ export default function EditProfile({
     setSaving(false);
   }
 
-  const formEmpty = !name && !avatarUrl;
-
   const submitIcon = saving ? faCircleNotch : undefined;
 
   const submitText = saving ? "Saving" : "Save";
 
-  const submitDisabled = saving || formEmpty;
+  const submitDisabled = saving || !name;
 
   return (
     <div className={className}>
