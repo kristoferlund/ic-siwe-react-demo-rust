@@ -31,6 +31,9 @@ export default function EditProfile({
       if (response && "Ok" in response) {
         setName(response.Ok.name);
         setAvatarUrl(response.Ok.avatar_url);
+        if (response.Ok.name === "No Name") {
+          setHasProfile(false);
+        }
       } else {
         setHasProfile(false);
       }
@@ -44,8 +47,13 @@ export default function EditProfile({
   // Don't render form when loading profile
   if (loading)
     return (
-      <div className="flex justify-center w-full">
-        <FontAwesomeIcon className="w-4 h-4" icon={faCircleNotch} spin />
+      <div className={className}>
+        <div className="flex flex-col items-center w-full gap-5 h-72">
+          <div className="text-2xl font-bold">User Profile</div>
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <FontAwesomeIcon className="w-4 h-4" icon={faCircleNotch} spin />
+          </div>
+        </div>
       </div>
     );
 

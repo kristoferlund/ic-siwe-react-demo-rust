@@ -50,6 +50,7 @@ export function IdentityProvider({
 
   // Local state
   const [actor, setActor] = useState<ActorSubclass<SiweService>>();
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [identity, setIdentity] = useState<DelegationIdentity>();
   const [identityAddress, setIdentityAddress] = useState<string>();
@@ -76,6 +77,7 @@ export function IdentityProvider({
       setDelegationChain(d);
       setIdentity(DelegationIdentity.fromDelegation(i, d));
       setIdentityAddress(s.address);
+      setIsLoading(false);
     } catch (e) {
       console.error("Error loading identity:", e);
       throw e;
@@ -287,6 +289,7 @@ export function IdentityProvider({
       value={{
         login,
         clear,
+        isLoading,
         isLoggingIn,
         isError,
         delegationChain,

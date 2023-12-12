@@ -29,7 +29,13 @@ export default function AllProfiles() {
         <div className="flex flex-col items-center gap-5">
           <div className="flex flex-wrap items-center justify-center gap-5">
             {loading && (
-              <FontAwesomeIcon className="w-4 h-4" icon={faCircleNotch} spin />
+              <div className="flex flex-col items-center justify-center w-full h-64">
+                <FontAwesomeIcon
+                  className="w-4 h-4"
+                  icon={faCircleNotch}
+                  spin
+                />
+              </div>
             )}
             {profiles.map((p) => (
               <ProfileCard key={p[0]} principal={p[0]} profile={p[1]} />

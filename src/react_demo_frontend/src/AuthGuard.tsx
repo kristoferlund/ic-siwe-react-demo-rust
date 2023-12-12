@@ -12,7 +12,16 @@ type AuthGuardProps = {
 export default function AuthGuard({ children }: AuthGuardProps) {
   const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
-  const { clear, identity, identityAddress } = useIdentity();
+  const { clear, isLoading, identity, identityAddress } = useIdentity();
+
+  console.log("AuthGuard: ", {
+    isLoading,
+    isConnected,
+    address,
+    chain,
+    identity,
+    identityAddress,
+  });
 
   // If the user is not connected, clear the session.
   useEffect(() => {
@@ -36,7 +45,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   }, [address, clear, identityAddress]);
 
   // If wallet is not connected or there is no identity, show login page.
-  if (!isConnected || !identity) {
+  if (!isLoading && (!isConnected || !identity)) {
     return <LoginPage />;
   }
 

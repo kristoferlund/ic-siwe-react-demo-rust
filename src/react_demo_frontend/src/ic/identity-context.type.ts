@@ -11,6 +11,7 @@ export type IdentityContextType = {
    * user out".
    */
   clear: () => void;
+  isLoading: boolean;
   isLoggingIn: boolean;
   isError: boolean;
   delegationChain?: DelegationChain;
