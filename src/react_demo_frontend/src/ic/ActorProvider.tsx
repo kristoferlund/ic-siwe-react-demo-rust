@@ -4,7 +4,6 @@ import {
   ActorSubclass,
   HttpAgent,
   HttpAgentOptions,
-  HttpDetailsResponse,
 } from "@dfinity/agent";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -12,22 +11,6 @@ import { ActorContextType } from "./actor-context.type";
 import { IDL } from "@dfinity/candid";
 import { isDelegationValid } from "@dfinity/identity";
 import { useIdentity } from "./useIdentity";
-
-type AgentHTTPResponseError = {
-  name: "AgentHTTPResponseError";
-  response: HttpDetailsResponse;
-};
-
-function ErrorIsAgentHTTPResponseError(
-  err: unknown
-): err is AgentHTTPResponseError {
-  return (
-    typeof err === "object" &&
-    err !== null &&
-    "name" in err &&
-    err.name === "AgentHTTPResponseError"
-  );
-}
 
 interface ActorProviderProps<T> {
   httpAgentOptions?: HttpAgentOptions;
@@ -62,11 +45,7 @@ export function ActorProvider<T>({
               try {
                 return await originalProperty.apply(this, args);
               } catch (err) {
-                if (
-                  ErrorIsAgentHTTPResponseError(err) &&
-                  delegationChain &&
-                  !isDelegationValid(delegationChain) // TODO: How does timezones affect this?
-                ) {
+                if (delegationChain && !isDelegationValid(delegationChain)) {
                   clear(); // Clears the identity from the state and local storage. Effectively "logs the user out".
                   setActor(undefined); // Clears the actor from the state.
                 }
