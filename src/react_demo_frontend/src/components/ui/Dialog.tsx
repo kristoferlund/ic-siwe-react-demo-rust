@@ -51,7 +51,7 @@ export default function Dialog({
               />
             </button>
           </div>
-          <div className="flex flex-col items-center w-full p-8 gap-5">
+          <div className="flex flex-col items-center w-full gap-5 py-8 md:px-8">
             {children}
           </div>
         </HeadlessDialog.Panel>
