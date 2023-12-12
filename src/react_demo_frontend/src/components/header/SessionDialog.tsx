@@ -9,28 +9,41 @@ type SessionDialogProps = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
+function arrayBufferToHex(arrayBuffer: ArrayBuffer): string {
+  const byteArray = new Uint8Array(arrayBuffer);
+  return Array.from(byteArray, (byte) =>
+    byte.toString(16).padStart(2, "0")
+  ).join("");
+}
+
 export default function SessionDialog({
   isOpen,
   setIsOpen,
 }: SessionDialogProps) {
-  const { clear, identity } = useIdentity();
+  const { clear, identity, delegationChain } = useIdentity();
 
   if (!identity) return null;
-
-  // const createdAt = new Date(Number(session?.created_at / 1000000n));
-  // const maxAge = Number(session?.max_age / 1000000n);
-  // const expiresAt = new Date(createdAt.getTime() + maxAge);
 
   return (
     <Dialog className="max-w-xl" isOpen={isOpen} setIsOpen={setIsOpen}>
       <HeadlessDialog.Title>Session</HeadlessDialog.Title>
       <div className="px-4 py-2 text-xs rounded-lg text-zinc-400 bg-zinc-900/50">
         <pre>
-          {/* Created: {createdAt.toLocaleDateString()}{" "}
-          {createdAt.toLocaleTimeString()}
-          <br />
-          Expires: {expiresAt.toLocaleDateString()}{" "}
-          {expiresAt.toLocaleTimeString()} */}
+          {delegationChain?.delegations.map((delegation) => {
+            const pubKey = arrayBufferToHex(delegation.delegation.pubkey);
+            const expiration = new Date(
+              Number(delegation.delegation.expiration / 1000000n)
+            );
+            return (
+              <div key={pubKey}>
+                pubkey: {pubKey.slice(0, 8)}...{pubKey.slice(-8)}
+                <br />
+                expiration: {expiration.toLocaleDateString()}{" "}
+                {expiration.toLocaleTimeString()}
+                <br />
+              </div>
+            );
+          })}
         </pre>
       </div>
       <EditProfile

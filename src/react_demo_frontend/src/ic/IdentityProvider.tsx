@@ -73,6 +73,7 @@ export function IdentityProvider({
 
       const i = Ed25519KeyIdentity.fromJSON(JSON.stringify(s.sessionIdentity));
       const d = DelegationChain.fromJSON(JSON.stringify(s.delegationChain));
+      setDelegationChain(d);
       setIdentity(DelegationIdentity.fromDelegation(i, d));
       setIdentityAddress(s.address);
     } catch (e) {
