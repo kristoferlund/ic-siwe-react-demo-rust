@@ -80,6 +80,7 @@ export function IdentityProvider({
       setIsLoading(false);
     } catch (e) {
       console.error("Error loading identity:", e);
+      setIsLoading(false);
       throw e;
     }
   }

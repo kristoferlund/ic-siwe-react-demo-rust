@@ -14,15 +14,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const { chain } = useNetwork();
   const { clear, isLoading, identity, identityAddress } = useIdentity();
 
-  console.log("AuthGuard: ", {
-    isLoading,
-    isConnected,
-    address,
-    chain,
-    identity,
-    identityAddress,
-  });
-
   // If the user is not connected, clear the session.
   useEffect(() => {
     if (!isConnected) {
