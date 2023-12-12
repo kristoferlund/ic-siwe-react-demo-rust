@@ -18,8 +18,8 @@ export const { chains, publicClient } = configureChains(supportedChains, [
 ]);
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "ic-siwe-demo-react",
+  projectId: "3936b3795b20eea5fe9282a3a80be958",
   chains,
 });
 
