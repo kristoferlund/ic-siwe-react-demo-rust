@@ -23,7 +23,7 @@ export default function AllProfiles() {
   }, [actor]);
 
   return (
-    <div className="w-full max-w-2xl border-zinc-700/50 border-[1px] bg-zinc-900 px-5 drop-shadow-xl rounded-3xl flex flex-col items-center">
+    <div className="w-full max-w-3xl border-zinc-700/50 border-[1px] bg-zinc-900 px-5 drop-shadow-xl rounded-3xl flex flex-col items-center">
       <div className="flex flex-col items-center w-full gap-10 p-8">
         <div className="text-2xl font-bold">User Profiles</div>
         <div className="flex flex-col items-center gap-5">

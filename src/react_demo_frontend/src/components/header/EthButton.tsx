@@ -33,7 +33,7 @@ export default function EthButton() {
       return "Connecting...";
     }
     if (isConnected) {
-      return address?.slice(0, 5) + "..." + address?.slice(-3);
+      return address?.slice(0, 6) + "..." + address?.slice(-4);
     }
     return "Connect";
   };

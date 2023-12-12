@@ -37,8 +37,8 @@ export default function ProfileCard({ principal, profile }: ProfileCardProps) {
       <div className="w-32 font-bold text-center overflow-clip whitespace-nowrap overflow-ellipsis">
         {profile.name}
       </div>
-      <PrincipalPill className="bg-zinc-700" principal={principal} />
-      <AddressPill address={profile.address} className="bg-zinc-700" />
+      <PrincipalPill className="w-full bg-zinc-700" principal={principal} />
+      <AddressPill address={profile.address} className="w-full bg-zinc-700" />
     </div>
   );
 }
