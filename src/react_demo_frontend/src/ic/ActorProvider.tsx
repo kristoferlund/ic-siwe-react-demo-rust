@@ -10,6 +10,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { ActorContextType } from "./actor-context.type";
 import { IDL } from "@dfinity/candid";
 import { isDelegationValid } from "@dfinity/identity";
+import toast from "react-hot-toast";
 import { useIdentity } from "./useIdentity";
 
 interface ActorProviderProps<T> {
@@ -48,6 +49,16 @@ export function ActorProvider<T>({
                 if (delegationChain && !isDelegationValid(delegationChain)) {
                   clear(); // Clears the identity from the state and local storage. Effectively "logs the user out".
                   setActor(undefined); // Clears the actor from the state.
+                } else {
+                  if (
+                    typeof err === "object" &&
+                    err !== null &&
+                    "message" in err
+                  ) {
+                    toast.error(err.message as string, {
+                      position: "bottom-right",
+                    });
+                  }
                 }
                 throw err; // Re-throw the error after handling
               }
