@@ -26,8 +26,8 @@ thread_local! {
     );
 }
 
+// This guard require that the user has a user profile before being able to call the function.
 fn profile_guard() -> Result<(), String> {
-    // Require that user has a user profile. An empty profile is created on first successful login.
     USER_PROFILES.with(|p| {
         if !p.borrow().contains_key(&ic_cdk::caller().to_string()) {
             return Err("No profile found for the given address".to_string());
@@ -74,11 +74,15 @@ fn list_profiles() -> Result<Vec<(String, UserProfile)>, String> {
     Ok(profiles)
 }
 
+// Prepare the login by generating a challenge (the SIWE message) and returning it to the caller.
 #[update]
 fn prepare_login(address: String) -> Result<String, String> {
     ic_siwe::prepare_login(&address).map(|m| m.into())
 }
 
+// Login the user by verifying the signature of the SIWE message. If the signature is valid, the
+// public key is returned. In this step, the delegation is also prepared to be fetched in the next
+// step.
 #[update]
 fn login(signature: String, address: String, session_key: ByteBuf) -> Result<ByteBuf, String> {
     match ic_siwe::login(&signature, &address, session_key) {
@@ -109,6 +113,7 @@ fn login(signature: String, address: String, session_key: ByteBuf) -> Result<Byt
     }
 }
 
+// Once logged in, the user can fetch the delegation to be used for authentication.
 #[query]
 fn get_delegation(
     address: String,
@@ -117,6 +122,7 @@ fn get_delegation(
     ic_siwe::get_delegation(&address, session_key)
 }
 
+// ic-siwe provides default values for all settings except the domain, uri and salt.
 fn siwe_init() {
     ic_siwe::init(
         ic_siwe::SettingsBuilder::new("127.0.0.1", "http://127.0.0.1:5173", "salt")
@@ -130,11 +136,13 @@ fn siwe_init() {
     .unwrap();
 }
 
+// The siwe_init function is called when the canister is created to initialize the SIWE library.
 #[init]
 fn init() {
     siwe_init();
 }
 
+// Make sure to call the init function after upgrading the canister.
 #[post_upgrade]
 fn upgrade() {
     siwe_init();
