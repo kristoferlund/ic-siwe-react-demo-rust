@@ -65,7 +65,11 @@ export default function EditProfile({
 
     if (response && "Ok" in response) {
       toast.success("Profile saved");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } else {
+      if (response && "Err" in response) console.error(response.Err);
       toast.error("Error saving profile");
     }
     setSaving(false);
