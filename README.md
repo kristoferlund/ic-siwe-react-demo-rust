@@ -12,12 +12,6 @@ Code is not production ready. Expect breaking changes. Code is not fully tested 
 
 Deployed demo can be accessed here: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
 
-## Prerequisites
-
-The ic-siwe library needs to be available in a sibling directory, named `ic-siwe`.
-
-https://github.com/kristoferlund/ic-siwe-rust
-
 ## Run
 
 ```bash

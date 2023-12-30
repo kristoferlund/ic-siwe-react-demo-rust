@@ -1,8 +1,5 @@
-type Error = record {
-  message : text;
-  status : nat16;
-  status_text : text;
-};
+type Name = text;
+type AvatarUrl = text;
 
 type UserProfile = record {
   address : text;
@@ -12,77 +9,21 @@ type UserProfile = record {
 
 type GetMyProfileResponse = variant {
   Ok : UserProfile;
-  Err : Error;
+  Err : text;
 };
 
 type SaveMyProfileResponse = variant {
-  Ok : text;
-  Err : Error;
+  Ok : UserProfile;
+  Err : text;
 };
 
 type ListProfilesResponse = variant {
   Ok : vec record { text; UserProfile };
-  Err : Error;
-};
-
-type ListActiveSessionsResponse = variant {
-  Ok : vec Session;
-  Err : Error;
-};
-
-type BasicResponse = variant {
-  Ok : text;
   Err : text;
 };
 
-type Session = record {
-  address : text;
-  created_at : nat64;
-  max_age : nat64;
-};
-
-type PublicKey = blob;
-type Timestamp = nat64;
-type Address = text;
-type SessionKey = PublicKey;
-type SiweSignature = text;
-type SiweMessage = text;
-type CanisterPublicKey = PublicKey;
-type Name = text;
-type AvatarUrl = text;
-
-type PrepareLoginResponse = variant {
-  Ok : SiweMessage;
-  Err : text;
-};
-
-type LoginResponse = variant {
-  Ok : CanisterPublicKey;
-  Err : text;
-};
-
-type Delegation = record {
-  pubkey : PublicKey;
-  expiration : Timestamp;
-  targets : opt vec principal;
-};
-
-type SignedDelegation = record {
-  delegation : Delegation;
-  signature : blob;
-};
-
-type GetDelegationResponse = variant {
-  Ok : SignedDelegation;
-  Err : text;
-};
-
-service : {
+service : (siwe_provider_canister : text) -> {
   "get_my_profile" : () -> (GetMyProfileResponse);
   "save_my_profile" : (Name, AvatarUrl) -> (SaveMyProfileResponse);
   "list_profiles" : () -> (ListProfilesResponse);
-  "list_active_sessions" : () -> (ListActiveSessionsResponse);
-  "prepare_login" : (Address) -> (PrepareLoginResponse);
-  "login" : (SiweSignature, Address, SessionKey) -> (LoginResponse);
-  "get_delegation" : (Address, SessionKey) -> (GetDelegationResponse) query;
 };

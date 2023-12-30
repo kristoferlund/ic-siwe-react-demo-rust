@@ -1,5 +1,10 @@
 {
   "canisters": {
+    "ic_siwe_provider": {
+      "type": "custom",
+      "candid": "https://github.com/kristoferlund/ic-siwe/raw/db19de428226ae8cad04361c4bc7d01085d0f398/packages/ic_siwe_provider/ic_siwe_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siwe/raw/db19de428226ae8cad04361c4bc7d01085d0f398/packages/ic_siwe_provider/ic_siwe_provider.wasm.gz"
+    },
     "react_demo_backend": {
       "candid": "src/react_demo_backend/react_demo_backend.did",
       "package": "react_demo_backend",

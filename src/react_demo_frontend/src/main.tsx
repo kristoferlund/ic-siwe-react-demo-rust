@@ -3,10 +3,14 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import {
-  canisterId,
-  idlFactory,
+  canisterId as backendCanisterId,
+  idlFactory as backendIdlFactory,
 } from "../../declarations/react_demo_backend/index";
 import { chains, wagmiConfig } from "./wagmi/wagmi.config.ts";
+import {
+  canisterId as siweCanisterId,
+  idlFactory as siweIdlFactory,
+} from "../../declarations/ic_siwe_provider/index";
 
 import { ActorProvider } from "./ic/ActorProvider.tsx";
 import App from "./App.tsx";
@@ -36,11 +40,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           overlayBlur: "none",
         })}
       >
-        <IdentityProvider canisterId={canisterId} idlFactory={idlFactory}>
+        <IdentityProvider
+          canisterId={siweCanisterId}
+          idlFactory={siweIdlFactory}
+        >
           <ActorProvider<_SERVICE>
-            canisterId={canisterId}
+            canisterId={backendCanisterId}
             context={actorContext}
-            idlFactory={idlFactory}
+            idlFactory={backendIdlFactory}
           >
             <AuthGuard>
               <App />

@@ -19,7 +19,8 @@ import { useAccount, useSignMessage } from "wagmi";
 
 import { IDL } from "@dfinity/candid";
 import { IdentityContext } from "./IdentityContext";
-import { SiweService } from "./siwe-service.type";
+import { Principal } from "@dfinity/principal";
+import { _SERVICE } from "../../../declarations/ic_siwe_provider/ic_siwe_provider.did";
 
 const STATE_STORAGE_KEY = "identityProviderState";
 
@@ -50,7 +51,7 @@ export function IdentityProvider({
 
   // Local state
   const [anonymousActor, setAnonymousActor] =
-    useState<ActorSubclass<SiweService>>();
+    useState<ActorSubclass<_SERVICE>>();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [identity, setIdentity] = useState<DelegationIdentity>();
@@ -144,7 +145,7 @@ export function IdentityProvider({
       }
 
       setAnonymousActor(
-        Actor.createActor<SiweService>(idlFactory, {
+        Actor.createActor<_SERVICE>(idlFactory, {
           agent,
           canisterId,
           ...actorOptions,
@@ -181,13 +182,15 @@ export function IdentityProvider({
 
     async function callGetDelegation(
       address: `0x${string}` | undefined,
-      sessionPublicKey: DerEncodedPublicKey
+      sessionPublicKey: DerEncodedPublicKey,
+      expiration: bigint
     ) {
       if (!anonymousActor || !address) return;
 
       const response = await anonymousActor.get_delegation(
         address,
-        new Uint8Array(sessionPublicKey)
+        new Uint8Array(sessionPublicKey),
+        expiration
       );
 
       if ("Err" in response) {
@@ -229,24 +232,26 @@ export function IdentityProvider({
         const sessionIdentity = Ed25519KeyIdentity.generate();
         const sessionPublicKey = sessionIdentity.getPublicKey().toDer();
 
-        const userCanisterPublicKey = await callLogin(
+        const loginOkResponse = await callLogin(
           data,
           address,
           sessionPublicKey
         );
-        if (!userCanisterPublicKey) return;
+        if (!loginOkResponse) return;
 
         const signedDelegation = await callGetDelegation(
           address,
-          sessionPublicKey
+          sessionPublicKey,
+          loginOkResponse.expiration
         );
         if (!signedDelegation) return;
 
         const delegations: SignedDelegation[] = [
           {
             delegation: new Delegation(
-              signedDelegation.delegation.pubkey,
-              signedDelegation.delegation.expiration
+              (signedDelegation.delegation.pubkey as Uint8Array).buffer,
+              signedDelegation.delegation.expiration,
+              signedDelegation.delegation.targets[0] as Principal[]
             ),
             signature: asSignature(signedDelegation.signature),
           },
@@ -254,7 +259,7 @@ export function IdentityProvider({
 
         const delegationChain = DelegationChain.fromDelegations(
           delegations,
-          asDerEncodedPublicKey(userCanisterPublicKey)
+          asDerEncodedPublicKey(loginOkResponse.user_canister_pubkey)
         );
 
         const identity = DelegationIdentity.fromDelegation(
