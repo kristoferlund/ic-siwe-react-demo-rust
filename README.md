@@ -15,7 +15,7 @@ Deployed demo can be accessed here: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
 ## Run
 
 ```bash
-dfx start --background
+dfx start --clean --background
 make deploy-backend
 make deploy-frontend
 ```
