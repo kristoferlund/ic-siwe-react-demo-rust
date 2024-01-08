@@ -2,7 +2,7 @@ import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import EditProfile from "../profile/EditProfile";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { useIdentity } from "../../ic/useIdentity";
+import { useSiweIdentity } from "ic-use-siwe-identity";
 
 type SessionDialogProps = {
   isOpen: boolean;
@@ -20,7 +20,7 @@ export default function SessionDialog({
   isOpen,
   setIsOpen,
 }: SessionDialogProps) {
-  const { clear, identity, delegationChain } = useIdentity();
+  const { clear, identity, delegationChain } = useSiweIdentity();
 
   if (!identity) return null;
 

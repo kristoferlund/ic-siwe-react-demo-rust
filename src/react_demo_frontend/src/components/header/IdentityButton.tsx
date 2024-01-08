@@ -1,11 +1,11 @@
 import Button from "../ui/Button";
 import PrincipalDialog from "./PrincipalDialog";
 import { useAccount } from "wagmi";
-import { useIdentity } from "../../ic/useIdentity";
+import { useSiweIdentity } from "ic-use-siwe-identity";
 import { useState } from "react";
 
 export default function IdentityButton() {
-  const { identity } = useIdentity();
+  const { identity } = useSiweIdentity();
   const { isConnected } = useAccount();
 
   const [isOpen, setIsOpen] = useState(false);

@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from "react";
-import { actorContext, useActor } from "../../main";
 
 import Button from "../ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
+import { useActor } from "../../ic/Actors";
 
 type EditProfileProps = {
   className?: string;
@@ -15,7 +15,7 @@ export default function EditProfile({
   className,
   allwaysShow,
 }: EditProfileProps) {
-  const { actor } = useActor(actorContext);
+  const { actor } = useActor();
 
   // Local state
   const [name, setName] = useState("");

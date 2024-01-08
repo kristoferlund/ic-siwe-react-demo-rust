@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { useIdentity } from "../../ic/useIdentity";
+import { useSiweIdentity } from "ic-use-siwe-identity";
 
 type SessionDialogProps = {
   isOpen: boolean;
@@ -12,7 +12,7 @@ export default function PrincipalDialog({
   isOpen,
   setIsOpen,
 }: SessionDialogProps) {
-  const { clear, identity } = useIdentity();
+  const { clear, identity } = useSiweIdentity();
 
   if (!identity) return null;
 
