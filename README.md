@@ -20,9 +20,17 @@ The goal of the [ic-siwe](https://github.com/kristoferlund/ic-siwe) project is t
 
 ## 👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
 
+## Key features
+
+The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development experience. It also includes the following features:
+
+- TypeScript
+- TailwindCSS
+- Wagmi/Viem Ethereum libraries
+- RainbowKit for Ethereum wallet integration
+
 ## Table of contents
 
-- [Key features](#key-features)
 - [App components](#app-components)
   - [Backend](#backend)
   - [Frontend](#frontend)
@@ -36,15 +44,6 @@ The goal of the [ic-siwe](https://github.com/kristoferlund/ic-siwe) project is t
 - [Updates](#updates)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Key features
-
-The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development experience. It also includes the following features:
-
-- TypeScript
-- TailwindCSS
-- Wagmi/Viem Ethereum libraries
-- RainbowKit for Ethereum wallet integration
 
 ## App components
 
