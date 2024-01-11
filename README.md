@@ -20,6 +20,23 @@ The goal of the [ic-siwe](https://github.com/kristoferlund/ic-siwe) project is t
 
 ## 👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
 
+## Table of contents
+
+- [Key features](#key-features)
+- [App components](#app-components)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [IC SIWE Provider](#ic-siwe-provider)
+- [How it works](#how-it-works)
+- [Run locally](#run-locally)
+- [Details](#details)
+  - [IC SIWE Provider](#ic-siwe-provider-1)
+  - [Backend](#backend-1)
+  - [Frontend](#frontend-1)
+- [Updates](#updates)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Key features
 
 The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development experience. It also includes the following features:
@@ -33,7 +50,7 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 If you are new to IC, please read the [Internet Computer Basics](https://internetcomputer.org/basics) before proceeding.
 
-For a detailed description of the SIWE concept, see the [SIWE specification, EIP-4361](https://eips.ethereum.org/EIPS/eip-4361).
+For a detailed description of the SIWE concepts, see the [SIWE specification, EIP-4361](https://eips.ethereum.org/EIPS/eip-4361).
 
 This app consists of three main components:
 
@@ -47,17 +64,17 @@ The frontend is a React application that interacts with the backend canister. To
 
 ### IC SIWE Provider
 
-IC Siwe Provider is used to create an identity for the user. It is a a Rust based canister that implements the SIWE login flow. The flow starts with a SIWE message being generated and ends with a Delegate Identity being created for the user. The Delegate Identity gives the user access to the backend canister.
+The pre-built IC Siwe Provider is used to create an identity for the user. It is a a Rust based canister that implements the SIWE login flow. The flow starts with a SIWE message being generated and ends with a Delegate Identity being created for the user. The Delegate Identity gives the user access to the backend canister.
 
 ## How it works
 
 This is the high-level flow between the app components when a user logs in:
 
-1. An IC application requests a SIWE message from the `ic_siwe_provider` canister on behalf of the user.
+1. The application requests a SIWE message from the `ic_siwe_provider` canister on behalf of the user.
 2. The application displays the SIWE message to the user who signs it with their Ethereum wallet.
 3. The application sends the signed SIWE message to the `ic_siwe_provider` canister to login the user. The canister verifies the signature and creates an identity for the user.
 4. The application retrieves the identity from the `ic_siwe_provider` canister.
-5. The application can now use the identity to make authenticated calls to canisters.
+5. The application can now use the identity to make authenticated calls to the app canister.
 
 ![Sign in with Ethereum - Login flow](/media/flow.png)
 
@@ -67,6 +84,109 @@ This is the high-level flow between the app components when a user logs in:
 dfx start --clean --background
 make deploy-backend
 make deploy-frontend
+```
+
+## Details
+
+### IC SIWE Provider
+
+The `ic_siwe_provider` canister is pre-built and added to the project as a dependency in the [dfx.json](/dfx.json) file.
+
+```json
+{
+  "canisters": {
+    "ic_siwe_provider": {
+      "type": "custom",
+      "candid": "https://github.com/.../packages/ic_siwe_provider/ic_siwe_provider.did",
+      "wasm": "https://github.com/.../packages/ic_siwe_provider/ic_siwe_provider.wasm.gz"
+    },
+    ...
+  },
+  ...
+}
+```
+
+Its behavior is configured and passed as an argument to the canister `init` function. Below is an example of how to configure the canister using the `dfx` command line tool in the project [Makefile](/Makefile):
+
+```makefile
+dfx deploy ic_siwe_provider --argument "( \
+    record { \
+        domain = \"127.0.0.1\"; \
+        uri = \"http://127.0.0.1:5173\"; \
+        salt = \"salt\"; \
+        chain_id = opt 1; \
+        scheme = opt \"http\"; \
+        statement = opt \"Login to the app\"; \
+        sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
+        session_expires_in = opt 604800000000000; /* 1 week */ \
+        targets = opt vec { \
+            \"$$(dfx canister id ic_siwe_provider)\"; \
+            \"$$(dfx canister id react_demo_backend)\"; \
+        }; \
+    } \
+)"
+```
+
+For more information about the configuration options, see the [ic-siwe-provider](https://github.com/kristoferlund/ic-siwe/tree/main/packages/ic_siwe_provider) documentation.
+
+### Backend
+
+The backend is a Rust based canister that, for demonstration purposes, implements some basic functionality for managing user profiles. It is also given an init argument - the `ic_siwe_provider` canister id - to be able to verify the identity of the user.
+
+```makefile
+dfx deploy react_demo_backend --argument "$$(dfx canister id ic_siwe_provider)"
+```
+
+### Frontend
+
+The frontend is a React application that interacts with the backend canister. To be able to make authenticated calls to the backend canister, the frontend needs an identity. The identity is retrieved from the `ic_siwe_provider` canister.
+
+The frontend uses two other packages from the `ic-siwe` project to simplify logging in users and making authenticated calls to canisters:
+
+- [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siwe/tree/main/packages/ic-use-siwe-identity) - React hook and context provider for easy frontend integration with SIWE enabled Internet Computer canisters.
+- [ic-use-actor](https://github.com/kristoferlund/ic-use-actor) - A React context provider for managing Internet Computer (IC) actors with enhanced features like type safety and request/response interceptors.
+
+#### [SiweIdentityProvider](src/react_demo_frontend/src/main.tsx)
+
+The application's root component is wrapped with `SiweIdentityProvider` to provide all child components access to the SIWE identity context.
+
+```jsx
+// main.tsx
+
+import { SiweIdentityProvider } from 'ic-use-siwe-identity';
+import { _SERVICE } from "../../declarations/ic_siwe_provider/ic_siwe_provider.did";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    // ...
+    <SiweIdentityProvider<_SERVICE>
+      canisterId={canisterId}
+      idlFactory={idlFactory}
+    >
+      // ... app components
+    </SiweIdentityProvider>
+    // ...
+  </React.StrictMode>,
+);
+```
+
+#### [AuthGuard](src/react_demo_frontend/src/AuthGuard.tsx)
+
+An `AuthGuard` component is used to protect routes that require the user to be logged in. It also makes sure to log out the user if they change ethereum wallet etc.
+
+#### [useSiweIdentity](src/react_demo_frontend/src/components/login/LoginButton.tsx)
+
+To initiate the login flow, the `login` function is called on the Use the `useSiweIdentity` hook.
+
+```jsx
+// LoginButton.tsx
+
+import { useSiweIdentity } from "ic-use-siwe-identity";
+
+function LoginButton() {
+  const { login, clear, identity, ... } = useSiweIdentity();
+  // ...
+}
 ```
 
 ## Updates
