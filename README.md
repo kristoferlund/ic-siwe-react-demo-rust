@@ -96,8 +96,8 @@ The `ic_siwe_provider` canister is pre-built and added to the project as a depen
   "canisters": {
     "ic_siwe_provider": {
       "type": "custom",
-      "candid": "https://github.com/.../packages/ic_siwe_provider/ic_siwe_provider.did",
-      "wasm": "https://github.com/.../packages/ic_siwe_provider/ic_siwe_provider.wasm.gz"
+      "candid": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.3/ic_siwe_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.3/ic_siwe_provider.wasm.gz"
     },
     ...
   },
