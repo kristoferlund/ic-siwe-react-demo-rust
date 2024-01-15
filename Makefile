@@ -1,7 +1,8 @@
-deploy-backend:
-	dfx canister create ic_siwe_provider
-	dfx deploy backend --output-env-file .env1 --argument "$$(dfx canister id ic_siwe_provider)"
-	dfx deploy ic_siwe_provider --output-env-file .env2 --argument "( \
+create-canisters:
+	dfx canister create --all
+
+deploy-provider:
+	dfx deploy ic_siwe_provider --argument "( \
 	    record { \
 	        domain = \"127.0.0.1\"; \
 	        uri = \"http://127.0.0.1:5173\"; \
@@ -17,13 +18,18 @@ deploy-backend:
 	        }; \
 	    } \
 	)"
-	cat .env1 .env2 > .env
-	rm .env1 .env2
+
+deploy-backend:
+	dfx deploy backend --argument "$$(dfx canister id ic_siwe_provider)"
 
 deploy-frontend:
 	npm install
-	dfx generate ic_siwe_provider
-	dfx generate backend
+	dfx deploy frontend
+
+deploy-all: create-canisters deploy-provider deploy-backend deploy-frontend
+
+run-frontend:
+	npm install
 	npm run dev
 
 clean:
