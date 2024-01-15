@@ -44,3 +44,6 @@ lerna-debug.log*
 *.sln
 *.sw?
 *.local # Local configuration files
+
+# Makefiles
+Makefile.prod
