@@ -6,7 +6,6 @@ import AddressPill from "../AddressPill";
 import PrincipalPill from "../PrincipalPill";
 import { useSiweIdentity } from "ic-use-siwe-identity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEthereum } from "@fortawesome/free-brands-svg-icons";
 import { faLeftRight } from "@fortawesome/free-solid-svg-icons";
 
 export function NoProfileMessage() {
@@ -49,8 +48,8 @@ export function NoProfileMessage() {
           icon={faLeftRight}
         />
         <PrincipalPill
+          className="inline-block bg-zinc-700 "
           principal={identity?.getPrincipal().toString()}
-          className="inline-block bg-zinc-700"
         />
       </div>
       <div>Now, save your user profile!</div>
