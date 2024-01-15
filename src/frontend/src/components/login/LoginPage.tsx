@@ -6,10 +6,45 @@ import ConnectButton from "./ConnectButton";
 import LoginButton from "./LoginButton";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
+import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
+  const {
+    preloadSiweMessage,
+    isSiweMessageLoading,
+    isSiweMessageLoaded,
+    loginError,
+  } = useSiweIdentity();
+
+  /**
+   * Preload a Siwe message on every address change.
+   */
+  useEffect(() => {
+    if (isSiweMessageLoaded || isSiweMessageLoading || !isConnected || !address)
+      return;
+    preloadSiweMessage();
+  }, [
+    isConnected,
+    address,
+    isSiweMessageLoading,
+    isSiweMessageLoaded,
+    preloadSiweMessage,
+  ]);
+
+  /**
+   * Show an error toast if the login failed.
+   */
+  useEffect(() => {
+    if (loginError) {
+      toast.error(loginError, {
+        position: "bottom-right",
+      });
+    }
+  }, [loginError]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen gap-10">
