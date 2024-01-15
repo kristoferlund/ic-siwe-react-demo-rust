@@ -8,14 +8,17 @@ import { useSiweIdentity } from "ic-use-siwe-identity";
 export default function LoginButton() {
   const { isConnected } = useAccount();
   const { chain } = useNetwork();
-  const { login, isLoggingIn } = useSiweIdentity();
+  const { login, isLoggingIn, isSiweMessageLoaded } = useSiweIdentity();
 
   const text = isLoggingIn ? "Signing in" : "Sign in";
 
   const icon = isLoggingIn ? faCircleNotch : undefined;
 
   const disabled =
-    !isChainIdSupported(chain?.id) || isLoggingIn || !isConnected;
+    !isChainIdSupported(chain?.id) ||
+    isLoggingIn ||
+    !isConnected ||
+    !isSiweMessageLoaded;
 
   return (
     <Button
