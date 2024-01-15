@@ -11,7 +11,7 @@
       "type": "rust"
     },
     "frontend": {
-      "dependencies": ["backend"],
+      "dependencies": ["backend", "ic_siwe_provider"],
       "source": ["dist"],
       "type": "assets",
       "build": ["npm run build"]
