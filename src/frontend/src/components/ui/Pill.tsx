@@ -9,7 +9,7 @@ export default function Pill({ className, children }: PillProps) {
 
   return (
     <div className={className}>
-      <div className="flex items-center gap-2 whitespace-nowrap">
+      <div className="flex items-center justify-center w-full gap-2 whitespace-nowrap">
         {children}
       </div>{" "}
     </div>
