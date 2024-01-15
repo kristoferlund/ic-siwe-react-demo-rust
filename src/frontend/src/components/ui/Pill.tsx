@@ -5,10 +5,13 @@ type PillProps = {
   children: React.ReactNode;
 };
 export default function Pill({ className, children }: PillProps) {
-  className = twMerge(
-    "flex items-center px-3 py-1 text-sm rounded-full bg-zinc-800 gap-2",
-    className
-  );
+  className = twMerge("px-3 py-1 text-sm rounded-full bg-zinc-800", className);
 
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={className}>
+      <div className="flex items-center gap-2 whitespace-nowrap">
+        {children}
+      </div>{" "}
+    </div>
+  );
 }

@@ -1,7 +1,7 @@
 import Pill from "./ui/Pill";
 
 type PrincipalPillProps = {
-  principal: string;
+  principal?: string;
   className?: string;
 };
 
