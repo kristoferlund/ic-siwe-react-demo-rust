@@ -22,7 +22,7 @@ The goal of the [ic-siwe](https://github.com/kristoferlund/ic-siwe) project is t
 
 ## Key features
 
-The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development experience. It also includes the following features:
+The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development experience. It also uses:
 
 - TypeScript
 - TailwindCSS
@@ -120,7 +120,7 @@ dfx deploy ic_siwe_provider --argument "( \
         session_expires_in = opt 604800000000000; /* 1 week */ \
         targets = opt vec { \
             \"$$(dfx canister id ic_siwe_provider)\"; \
-            \"$$(dfx canister id react_demo_backend)\"; \
+            \"$$(dfx canister id backend)\"; \
         }; \
     } \
 )"
@@ -133,7 +133,7 @@ For more information about the configuration options, see the [ic-siwe-provider]
 The backend is a Rust based canister that, for demonstration purposes, implements some basic functionality for managing user profiles. It is also given an init argument - the `ic_siwe_provider` canister id - to be able to verify the identity of the user.
 
 ```makefile
-dfx deploy react_demo_backend --argument "$$(dfx canister id ic_siwe_provider)"
+dfx deploy backend --argument "$$(dfx canister id ic_siwe_provider)"
 ```
 
 ### Frontend
@@ -145,7 +145,7 @@ The frontend uses two other packages from the `ic-siwe` project to simplify logg
 - [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siwe/tree/main/packages/ic-use-siwe-identity) - React hook and context provider for easy frontend integration with SIWE enabled Internet Computer canisters.
 - [ic-use-actor](https://github.com/kristoferlund/ic-use-actor) - A React context provider for managing Internet Computer (IC) actors with enhanced features like type safety and request/response interceptors.
 
-#### [SiweIdentityProvider](src/react_demo_frontend/src/main.tsx)
+#### [SiweIdentityProvider](src/frontend/src/main.tsx)
 
 The application's root component is wrapped with `SiweIdentityProvider` to provide all child components access to the SIWE identity context.
 
@@ -169,11 +169,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 );
 ```
 
-#### [AuthGuard](src/react_demo_frontend/src/AuthGuard.tsx)
+#### [AuthGuard](src/frontend/src/AuthGuard.tsx)
 
 An `AuthGuard` component is used to protect routes that require the user to be logged in. It also makes sure to log out the user if they change ethereum wallet etc.
 
-#### [useSiweIdentity](src/react_demo_frontend/src/components/login/LoginButton.tsx)
+#### [useSiweIdentity](src/frontend/src/components/login/LoginButton.tsx)
 
 To initiate the login flow, the `login` function is called on the Use the `useSiweIdentity` hook.
 

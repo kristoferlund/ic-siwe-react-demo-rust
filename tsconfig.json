@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/react_demo_frontend/src", "vite.config.ts"],
+  "include": ["src/frontend/src", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

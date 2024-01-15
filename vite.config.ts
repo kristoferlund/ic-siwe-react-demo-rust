@@ -13,7 +13,7 @@ const processEnvCanisterIds = Object.fromEntries(
 
 export default defineConfig({
   plugins: [react()],
-  root: "src/react_demo_frontend",
+  root: "src/frontend",
   build: {
     target: "es2020",
     outDir: "../../dist",

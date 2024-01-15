@@ -1,7 +1,7 @@
 import AddressPill from "../AddressPill";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PrincipalPill from "../PrincipalPill";
-import { UserProfile } from "../../../../declarations/react_demo_backend/react_demo_backend.did";
+import { UserProfile } from "../../../../declarations/backend/backend.did";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 

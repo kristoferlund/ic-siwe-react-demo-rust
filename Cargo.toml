@@ -1,5 +1,5 @@
 [workspace]
 members = [
-    "src/react_demo_backend",
+    "src/backend",
 ]
 resolver = "2"

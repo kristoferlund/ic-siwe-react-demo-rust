@@ -1,6 +1,6 @@
 deploy-backend:
 	dfx canister create ic_siwe_provider
-	dfx deploy react_demo_backend --output-env-file .env1 --argument "$$(dfx canister id ic_siwe_provider)"
+	dfx deploy backend --output-env-file .env1 --argument "$$(dfx canister id ic_siwe_provider)"
 	dfx deploy ic_siwe_provider --output-env-file .env2 --argument "( \
 	    record { \
 	        domain = \"127.0.0.1\"; \
@@ -13,7 +13,7 @@ deploy-backend:
 	        session_expires_in = opt 604800000000000; /* 1 week */ \
 	        targets = opt vec { \
 	            \"$$(dfx canister id ic_siwe_provider)\"; \
-	            \"$$(dfx canister id react_demo_backend)\"; \
+	            \"$$(dfx canister id backend)\"; \
 	        }; \
 	    } \
 	)"
@@ -23,7 +23,7 @@ deploy-backend:
 deploy-frontend:
 	npm install
 	dfx generate ic_siwe_provider
-	dfx generate react_demo_backend
+	dfx generate backend
 	npm run dev
 
 clean:

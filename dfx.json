@@ -5,13 +5,13 @@
       "candid": "https://github.com/kristoferlund/ic-siwe/raw/64bd789446838bebb6cad49c5bc3b556da4acd02/packages/ic_siwe_provider/ic_siwe_provider.did",
       "wasm": "https://github.com/kristoferlund/ic-siwe/raw/64bd789446838bebb6cad49c5bc3b556da4acd02/packages/ic_siwe_provider/ic_siwe_provider.wasm.gz"
     },
-    "react_demo_backend": {
-      "candid": "src/react_demo_backend/react_demo_backend.did",
-      "package": "react_demo_backend",
+    "backend": {
+      "candid": "src/backend/backend.did",
+      "package": "backend",
       "type": "rust"
     },
-    "react_demo_frontend": {
-      "dependencies": ["react_demo_backend"],
+    "frontend": {
+      "dependencies": ["backend"],
       "source": ["dist"],
       "type": "assets",
       "build": ["npm run build"]
