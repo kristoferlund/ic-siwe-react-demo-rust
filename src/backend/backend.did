@@ -23,7 +23,7 @@ type ListProfilesResponse = variant {
 };
 
 service : (siwe_provider_canister : text) -> {
-  "get_my_profile" : () -> (GetMyProfileResponse);
+  "get_my_profile" : () -> (GetMyProfileResponse) query;
   "save_my_profile" : (Name, AvatarUrl) -> (SaveMyProfileResponse);
-  "list_profiles" : () -> (ListProfilesResponse);
+  "list_profiles" : () -> (ListProfilesResponse) query;
 };
