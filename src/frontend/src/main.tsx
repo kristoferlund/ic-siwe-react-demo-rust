@@ -38,11 +38,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Actors>
             <AuthGuard>
               <App />
-              <Toaster />
             </AuthGuard>
           </Actors>
         </SiweIdentityProvider>
       </RainbowKitProvider>
     </WagmiConfig>
+    <Toaster />
   </React.StrictMode>
 );
