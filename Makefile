@@ -9,7 +9,7 @@ deploy-provider:
 	        salt = \"salt\"; \
 	        chain_id = opt 1; \
 	        scheme = opt \"http\"; \
-	        statement = opt \"Login to the app\"; \
+	        statement = opt \"Login to the SIWE/IC demo app\"; \
 	        sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
 	        session_expires_in = opt 604800000000000; /* 1 week */ \
 	        targets = opt vec { \
