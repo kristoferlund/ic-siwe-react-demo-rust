@@ -10,7 +10,7 @@ export default function GitHubIcon() {
         target="_blank"
       >
         <FontAwesomeIcon
-          className="w-5 h-5 mx-3 text-zinc-500"
+          className="w-10 h-10 mx-3 text-zinc-500"
           icon={faGithub}
         />
       </a>
