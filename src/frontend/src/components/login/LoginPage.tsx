@@ -20,13 +20,7 @@ export default function LoginPage(): React.ReactElement {
    * Preload a Siwe message on every address change.
    */
   useEffect(() => {
-    if (
-      prepareLoginStatus === "success" ||
-      prepareLoginStatus === "loading" ||
-      !isConnected ||
-      !address
-    )
-      return;
+    if (prepareLoginStatus !== "idle" || !isConnected || !address) return;
     prepareLogin();
   }, [isConnected, address, prepareLogin, prepareLoginStatus]);
 
