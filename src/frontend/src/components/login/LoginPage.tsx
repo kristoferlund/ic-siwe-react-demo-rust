@@ -13,34 +13,40 @@ import toast from "react-hot-toast";
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
-  const {
-    preloadSiweMessage,
-    isSiweMessageLoading,
-    isSiweMessageLoaded,
-    loginError,
-  } = useSiweIdentity();
+  const { prepareLogin, prepareLoginStatus, prepareLoginError, loginError } =
+    useSiweIdentity();
 
   /**
    * Preload a Siwe message on every address change.
    */
   useEffect(() => {
-    if (isSiweMessageLoaded || isSiweMessageLoading || !isConnected || !address)
+    if (
+      prepareLoginStatus === "success" ||
+      prepareLoginStatus === "loading" ||
+      !isConnected ||
+      !address
+    )
       return;
-    preloadSiweMessage();
-  }, [
-    isConnected,
-    address,
-    isSiweMessageLoading,
-    isSiweMessageLoaded,
-    preloadSiweMessage,
-  ]);
+    prepareLogin();
+  }, [isConnected, address, prepareLogin, prepareLoginStatus]);
 
   /**
-   * Show an error toast if the login failed.
+   * Show an error toast if the prepareLogin() call fails.
+   */
+  useEffect(() => {
+    if (prepareLoginError) {
+      toast.error(prepareLoginError.message, {
+        position: "bottom-right",
+      });
+    }
+  }, [prepareLoginError]);
+
+  /**
+   * Show an error toast if the login call fails.
    */
   useEffect(() => {
     if (loginError) {
-      toast.error(loginError, {
+      toast.error(loginError.message, {
         position: "bottom-right",
       });
     }
