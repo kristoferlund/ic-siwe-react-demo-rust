@@ -49,17 +49,21 @@ export default function LoginPage(): React.ReactElement {
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen gap-10">
       <div className="flex items-center justify-center gap-5 md:gap-20">
-        <img alt="ic" className="w-28 h-28" src="/ic.svg" />
-        <img alt="react" className="w-28 h-28" src="/react.svg" />
-        <img alt="siwe" className="w-28 h-28" src="/siwe.svg" />
+        <img alt="ic" className="w-20 h-20 md:w-28 md:h-28" src="/ic.svg" />
+        <img
+          alt="react"
+          className="w-20 h-20 md:w-28 md:h-28"
+          src="/react.svg"
+        />
+        <img alt="siwe" className="w-20 h-20 md:w-28 md:h-28" src="/siwe.svg" />
       </div>
-      <div className="text-2xl font-bold text-center md:text-5xl">
+      <div className="px-10 text-2xl font-bold text-center md:text-5xl">
         Internet Computer + React + Sign In With Ethereum
       </div>
       <div className="w-full max-w-sm border-zinc-700/50 border-[1px] bg-zinc-900 px-5 drop-shadow-xl rounded-3xl flex flex-col items-center py-5 mt-8">
         <div className="flex flex-col items-center w-full gap-10 p-8">
           <div className="flex items-center justify-center w-full gap-5">
-            <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
+            <div className="items-center justify-center hidden w-8 h-8 text-xl font-bold rounded-full md:flex bg-zinc-300 text-zinc-800">
               1
             </div>
             <div>
@@ -78,7 +82,7 @@ export default function LoginPage(): React.ReactElement {
             </div>
           </div>
           <div className="flex items-center justify-center w-full gap-5">
-            <div className="flex items-center justify-center w-8 h-8 text-xl font-bold rounded-full bg-zinc-300 text-zinc-800">
+            <div className="items-center justify-center hidden w-8 h-8 text-xl font-bold rounded-full md:flex bg-zinc-300 text-zinc-800">
               2
             </div>
             <div>
