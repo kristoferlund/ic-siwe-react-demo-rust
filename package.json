@@ -1,7 +1,7 @@
 {
   "name": "ic-siwe-react-demo-rust",
-  "version": "0.0.1",
-  "description": "React demo application and template that ndemonstrates how to login Ethereum users into an IC canister using the Sign in with Ethereum (SIWE) standard.",
+  "version": "0.0.2",
+  "description": "React demo application and template that demonstrates how to login Ethereum users into an IC canister using the Sign in with Ethereum (SIWE) standard.",
   "author": "Kristofer Lund <kristofer@kristoferlund.se>",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "@headlessui/react": "^1.7.17",
     "@rainbow-me/rainbowkit": "^1.3.0",
     "ic-use-actor": "^0.0.3",
-    "ic-use-siwe-identity": "^0.0.3",
+    "ic-use-siwe-identity": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
