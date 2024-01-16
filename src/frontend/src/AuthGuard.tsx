@@ -36,6 +36,10 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     }
   }, [address, clear, identityAddress]);
 
+  if (isInitializing) {
+    return null;
+  }
+
   // If wallet is not connected or there is no identity, show login page.
   if (!isInitializing && (!isConnected || !identity)) {
     return <LoginPage />;
