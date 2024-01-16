@@ -35,24 +35,29 @@ export function NoProfileMessage() {
   if (loading || hasProfile) return null;
 
   return (
-    <div className="flex flex-col items-center w-full max-w-2xl gap-5 text-center">
-      <div className="text-2xl font-bold">Welcome!</div>
-      <div>
-        You are logged in and have established a one to one link between your
-        Ethereum address and your Internet Computer identity.
+    <div className="w-full max-w-2xl border-emerald-700/50 border-[1px] bg-emerald-900/50 px-5 py-5 drop-shadow-xl rounded-3xl flex flex-col items-center">
+      <div className="flex flex-col items-center w-full gap-10 py-8 md:px-8">
+        <div className="text-2xl font-bold">Welcome!</div>
+        <div className="text-lg leading-loose text-center">
+          You are logged in and have established a one to one link between your
+          Ethereum address and your Internet Computer identity.
+        </div>
+        <div>
+          <AddressPill
+            address={address}
+            className="inline-block bg-emerald-800"
+          />
+          <FontAwesomeIcon
+            className="w-5 h-5 mx-3 text-emerald-500"
+            icon={faLeftRight}
+          />
+          <PrincipalPill
+            className="inline-block bg-emerald-800 "
+            principal={identity?.getPrincipal().toString()}
+          />
+        </div>
+        <div className="text-lg">Now, save your user profile!</div>
       </div>
-      <div>
-        <AddressPill address={address} className="inline-block bg-zinc-700" />
-        <FontAwesomeIcon
-          className="w-5 h-5 mx-3 text-zinc-500"
-          icon={faLeftRight}
-        />
-        <PrincipalPill
-          className="inline-block bg-zinc-700 "
-          principal={identity?.getPrincipal().toString()}
-        />
-      </div>
-      <div>Now, save your user profile!</div>
     </div>
   );
 }
