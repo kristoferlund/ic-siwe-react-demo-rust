@@ -17,14 +17,14 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 
   // If the user is not connected, clear the session.
   useEffect(() => {
-    if (!isConnected) {
+    if (!isConnected && identity) {
       clear();
     }
-  }, [isConnected, clear]);
+  }, [isConnected, clear, identity]);
 
   // If user switches to an unsupported network, clear the session.
   useEffect(() => {
-    if (!isChainIdSupported(chain?.id)) {
+    if (chain?.id && !isChainIdSupported(chain.id)) {
       clear();
     }
   }, [chain, clear]);
