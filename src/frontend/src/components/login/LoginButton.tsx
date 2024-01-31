@@ -8,15 +8,15 @@ import { useSiweIdentity } from "ic-use-siwe-identity";
 export default function LoginButton() {
   const { isConnected } = useAccount();
   const { chain } = useNetwork();
-  const { login, loginStatus, prepareLoginStatus } = useSiweIdentity();
+  const { login, isLoggingIn, prepareLoginStatus } = useSiweIdentity();
 
-  const text = loginStatus === "logging-in" ? "Signing in" : "Sign in";
+  const text = isLoggingIn ? "Signing in" : "Sign in";
 
-  const icon = loginStatus === "logging-in" ? faCircleNotch : undefined;
+  const icon = isLoggingIn ? faCircleNotch : undefined;
 
   const disabled =
     !isChainIdSupported(chain?.id) ||
-    loginStatus === "logging-in" ||
+    isLoggingIn ||
     !isConnected ||
     prepareLoginStatus !== "success";
 

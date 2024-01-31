@@ -13,16 +13,16 @@ import toast from "react-hot-toast";
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const { chain } = useNetwork();
-  const { prepareLogin, prepareLoginStatus, prepareLoginError, loginError } =
+  const { prepareLogin, isPrepareLoginIdle, prepareLoginError, loginError } =
     useSiweIdentity();
 
   /**
    * Preload a Siwe message on every address change.
    */
   useEffect(() => {
-    if (prepareLoginStatus !== "idle" || !isConnected || !address) return;
+    if (!isPrepareLoginIdle || !isConnected || !address) return;
     prepareLogin();
-  }, [isConnected, address, prepareLogin, prepareLoginStatus]);
+  }, [isConnected, address, prepareLogin, isPrepareLoginIdle]);
 
   /**
    * Show an error toast if the prepareLogin() call fails.

@@ -7,7 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
--
+## [0.0.3] - 2024-01-31
+
+### Changed
+- Use new convenience state variables from [ic-use-siwe-identity](https://www.npmjs.com/package/ic-use-siwe-identity).
+```
+  isPreparingLogin: state.prepareLoginStatus === "preparing",
+  isPrepareLoginError: state.prepareLoginStatus === "error",
+  isPrepareLoginSuccess: state.prepareLoginStatus === "success",
+  isPrepareLoginIdle: state.prepareLoginStatus === "idle",
+  isLoggingIn: state.loginStatus === "logging-in",
+  isLoginError: state.loginStatus === "error",
+  isLoginSuccess: state.loginStatus === "success",
+  isLoginIdle: state.loginStatus === "idle",  
+```
+- Use v0.0.4 of the [ic_siwe_provider](https://github.com/kristoferlund/ic-siwe/tree/main/packages/ic_siwe_provider) canister.
+
 
 ## [0.0.2] - 2024-01-16
 
