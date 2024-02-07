@@ -1,5 +1,8 @@
 ![](media/header.png)
 
+> [!NOTE]  
+> This version of the demo features a backend canister built in Rust. There is also a [TypeScript version](https://github.com/kristoferlund/ic-siwe-react-demo-ts) built using [Azle](https://github.com/demergent-labs/azle).
+
 ✅ Sign in with Ethereum to interact with smart contracts (canisters) on the [Internet Computer](https://internetcomputer.org) (IC)!
 
 ✅ Establish a one-to-one relationship between an Ethereum wallet and an IC identity.
@@ -31,6 +34,9 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 ## Table of contents
 
+- [👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io](#-try-the-live-demo-httpsshtr2-2iaaa-aaaal-qckva-caiicp0io)
+- [Key features](#key-features)
+- [Table of contents](#table-of-contents)
 - [App components](#app-components)
   - [Backend](#backend)
   - [Frontend](#frontend)
@@ -41,6 +47,9 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
   - [IC SIWE Provider](#ic-siwe-provider-1)
   - [Backend](#backend-1)
   - [Frontend](#frontend-1)
+    - [SiweIdentityProvider](#siweidentityprovider)
+    - [AuthGuard](#authguard)
+    - [useSiweIdentity](#usesiweidentity)
 - [Updates](#updates)
 - [Contributing](#contributing)
 - [License](#license)
