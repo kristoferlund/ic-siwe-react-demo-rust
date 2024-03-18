@@ -3,15 +3,13 @@ import Dialog from "../ui/Dialog";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
 import { useSiweIdentity } from "ic-use-siwe-identity";
 
-type SessionDialogProps = {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-};
-
 export default function PrincipalDialog({
   isOpen,
   setIsOpen,
-}: SessionDialogProps) {
+}: {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}) {
   const { clear, identity } = useSiweIdentity();
 
   if (!identity) return null;

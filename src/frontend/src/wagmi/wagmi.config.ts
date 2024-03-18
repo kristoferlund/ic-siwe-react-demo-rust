@@ -1,30 +1,16 @@
-import { arbitrum, base, mainnet, optimism, polygon, zora } from "wagmi/chains";
-import { configureChains, createConfig } from "wagmi";
+import { createConfig, http } from "wagmi";
 
-import { getDefaultWallets } from "@rainbow-me/rainbowkit";
-import { publicProvider } from "wagmi/providers/public";
+import { mainnet } from "wagmi/chains";
+import { walletConnect } from "wagmi/connectors";
 
-export const supportedChains = [
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
-  zora,
-];
-
-export const { chains, publicClient } = configureChains(supportedChains, [
-  publicProvider(),
-]);
-
-const { connectors } = getDefaultWallets({
-  appName: "ic-siwe-demo-react",
-  projectId: "3936b3795b20eea5fe9282a3a80be958",
-  chains,
-});
+// Replace with your own WalletConnect project ID
+// Register for free at https://walletconnect.com/
+const WALLETCONNECT_PROJECT_ID = "3936b3795b20eea5fe9282a3a80be958";
 
 export const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
+  chains: [mainnet],
+  connectors: [walletConnect({ projectId: WALLETCONNECT_PROJECT_ID })],
+  transports: {
+    [mainnet.id]: http(),
+  },
 });

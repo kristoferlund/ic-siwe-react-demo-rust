@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 
 import LoginPage from "./components/login/LoginPage";
 import { isChainIdSupported } from "./wagmi/is-chain-id-supported";
@@ -11,7 +11,7 @@ type AuthGuardProps = {
 
 export default function AuthGuard({ children }: AuthGuardProps) {
   const { isConnected, address } = useAccount();
-  const { chain } = useNetwork();
+  const chainId = useChainId();
   const { clear, isInitializing, identity, identityAddress } =
     useSiweIdentity();
 
@@ -24,10 +24,10 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 
   // If user switches to an unsupported network, clear the session.
   useEffect(() => {
-    if (chain?.id && !isChainIdSupported(chain.id)) {
+    if (!isChainIdSupported(chainId)) {
       clear();
     }
-  }, [chain, clear]);
+  }, [chainId, clear]);
 
   // If the user switches to a different address, clear the session.
   useEffect(() => {

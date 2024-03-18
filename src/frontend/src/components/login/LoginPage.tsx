@@ -1,18 +1,18 @@
-import { useAccount, useNetwork } from "wagmi";
-
 import AddressPill from "../AddressPill";
 import Button from "../ui/Button";
 import ConnectButton from "./ConnectButton";
 import LoginButton from "./LoginButton";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
-import { useSiweIdentity } from "ic-use-siwe-identity";
-import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useAccount } from "wagmi";
+import { useChainId } from "wagmi";
+import { useEffect } from "react";
+import { useSiweIdentity } from "ic-use-siwe-identity";
 
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
-  const { chain } = useNetwork();
+  const chainId = useChainId();
   const { prepareLogin, isPrepareLoginIdle, prepareLoginError, loginError } =
     useSiweIdentity();
 
@@ -68,13 +68,13 @@ export default function LoginPage(): React.ReactElement {
             </div>
             <div>
               {!isConnected && <ConnectButton />}
-              {isConnected && isChainIdSupported(chain?.id) && (
+              {isConnected && isChainIdSupported(chainId) && (
                 <AddressPill
                   address={address}
                   className="justify-center w-44"
                 />
               )}
-              {isConnected && !isChainIdSupported(chain?.id) && (
+              {isConnected && !isChainIdSupported(chainId) && (
                 <Button disabled icon={faWaveSquare} variant="outline">
                   Unsupported Network
                 </Button>

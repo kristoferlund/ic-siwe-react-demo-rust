@@ -1,4 +1,4 @@
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 
 import Button from "../ui/Button";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
@@ -7,18 +7,26 @@ import { useSiweIdentity } from "ic-use-siwe-identity";
 
 export default function LoginButton() {
   const { isConnected } = useAccount();
-  const { chain } = useNetwork();
-  const { login, isLoggingIn, prepareLoginStatus } = useSiweIdentity();
+  const chainId = useChainId();
+  const { login, isLoggingIn, isPreparingLogin } = useSiweIdentity();
 
-  const text = isLoggingIn ? "Signing in" : "Sign in";
+  const text = () => {
+    if (isLoggingIn) {
+      return "Signing in";
+    }
+    if (isPreparingLogin) {
+      return "Preparing";
+    }
+    return "Sign in";
+  };
 
-  const icon = isLoggingIn ? faCircleNotch : undefined;
+  const icon = isLoggingIn || isPreparingLogin ? faCircleNotch : undefined;
 
   const disabled =
-    !isChainIdSupported(chain?.id) ||
+    !isChainIdSupported(chainId) ||
     isLoggingIn ||
     !isConnected ||
-    prepareLoginStatus !== "success";
+    isPreparingLogin;
 
   return (
     <Button
@@ -28,7 +36,7 @@ export default function LoginButton() {
       onClick={login}
       spin
     >
-      {text}
+      {text()}
     </Button>
   );
 }

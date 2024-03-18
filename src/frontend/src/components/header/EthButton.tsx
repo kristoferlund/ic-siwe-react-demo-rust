@@ -1,20 +1,22 @@
-import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
-
+import { AccountDialog } from "../AccountDialog";
 import Button from "../ui/Button";
+import ConnectDialog from "../ConnectDialog";
 import { faEthereum } from "@fortawesome/free-brands-svg-icons";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
+import { shortenEthAddress } from "../../eth/utils/shortenEthAddress";
 import { useAccount } from "wagmi";
+import { useState } from "react";
 
 export default function EthButton() {
   const { address, isConnected, isConnecting } = useAccount();
-  const { openConnectModal } = useConnectModal();
-  const { openAccountModal } = useAccountModal();
+  const [connectDialogOpen, setConnectDialogOpen] = useState(false);
+  const [accountDialogOpen, setAccountDialogOpen] = useState(false);
 
   const handleClick = () => {
     if (isConnected) {
-      openAccountModal?.();
+      setAccountDialogOpen(true);
     } else {
-      openConnectModal?.();
+      setConnectDialogOpen(true);
     }
   };
 
@@ -33,7 +35,7 @@ export default function EthButton() {
       return "Connecting...";
     }
     if (isConnected) {
-      return address?.slice(0, 6) + "..." + address?.slice(-4);
+      return shortenEthAddress(address);
     }
     return "Connect";
   };
@@ -43,6 +45,14 @@ export default function EthButton() {
       <Button icon={buttonIcon()} onClick={handleClick} variant="dark">
         {buttonText()}
       </Button>
+      <ConnectDialog
+        isOpen={connectDialogOpen}
+        setIsOpen={setConnectDialogOpen}
+      />
+      <AccountDialog
+        isOpen={accountDialogOpen}
+        setIsOpen={setAccountDialogOpen}
+      />
     </>
   );
 }

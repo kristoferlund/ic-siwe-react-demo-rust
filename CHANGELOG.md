@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+
+- Custom connect and account dialog components using wagmi directly instead of using RainbowKit.
+
+### Changed
+
+- Upgraded wagmi to v2.5.7. This introduces TanStack Query as an additional dependency.
+- Upgraded viem to v2.8.4
+
+### Removed
+
+- Removed RainbowKit as a dependency.
+
+
 ## [0.0.3] - 2024-01-31
 
 ### Changed
