@@ -17,10 +17,14 @@ export default function IdentityButton() {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)} variant="dark">
+      <Button
+        className="whitespace-nowrap"
+        onClick={() => setIsOpen(true)}
+        variant="dark"
+      >
         <img
           alt="Internet Computer"
-          className="inline-block w-4 h-4 mr-1"
+          className="inline-block w-4 h-4 mr-1 "
           src="/ic.svg"
         />
         {principal}

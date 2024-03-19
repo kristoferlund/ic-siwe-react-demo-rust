@@ -8,7 +8,7 @@ export default function Header() {
       <div className="hidden text-xl font-bold text-center md:block">
         Internet Computer + React + Sign In With Ethereum
       </div>
-      <div className="flex items-center justify-center gap-5 text-sm md:text-base">
+      <div className="flex flex-col items-center justify-center gap-5 text-sm md:text-base md:flex-row">
         <IdentityButton />
         <EthButton />
         <SessionButton />

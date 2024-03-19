@@ -10,11 +10,19 @@ export default function SessionButton() {
   return (
     <>
       <Button
-        className="w-10 h-10 rounded-full"
+        className="hidden w-10 h-10 rounded-full md:flex"
         icon={faUser}
         onClick={() => setIsOpen(true)}
         variant="dark"
       ></Button>
+      <Button
+        className="md:hidden"
+        icon={faUser}
+        onClick={() => setIsOpen(true)}
+        variant="dark"
+      >
+        User profile
+      </Button>
       <SessionDialog isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );

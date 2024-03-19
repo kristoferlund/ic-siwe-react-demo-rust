@@ -3,8 +3,6 @@ import { useAccount, useDisconnect, useEnsName } from "wagmi";
 import Button from "./ui/Button";
 import Dialog from "./ui/Dialog";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { shortenEthAddress } from "../eth/utils/shortenEthAddress";
 
 export function AccountDialog({
   isOpen,
@@ -20,21 +18,30 @@ export function AccountDialog({
 
   return (
     <Dialog className="w-80" isOpen={isOpen} setIsOpen={setIsOpen}>
+      <img
+        alt="Internet Computer"
+        className="inline-block w-12 h-12"
+        src="/ethereum.svg"
+      />{" "}
       <HeadlessDialog.Title className="flex justify-between">
-        Account
+        Ethereum Address
       </HeadlessDialog.Title>
-
-      <Button
-        className="w-full"
-        icon={faRightFromBracket}
-        onClick={() => {
-          setIsOpen(false);
-          disconnect();
-        }}
-        variant="outline"
-      >
-        {ensName ?? shortenEthAddress(address)}
-      </Button>
+      <div className="px-4 py-2 text-xs rounded-lg text-zinc-400 bg-zinc-900/50">
+        <code className="md:whitespace-nowrap">{ensName ?? address}</code>
+      </div>
+      <div className="flex justify-center w-full gap-5">
+        <Button onClick={() => setIsOpen(false)} variant="outline">
+          Close
+        </Button>
+        <Button
+          onClick={() => {
+            setIsOpen(false);
+            disconnect();
+          }}
+        >
+          Disconnect
+        </Button>
+      </div>
     </Dialog>
   );
 }

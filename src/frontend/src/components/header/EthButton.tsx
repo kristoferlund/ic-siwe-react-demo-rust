@@ -1,16 +1,21 @@
+import { useAccount, useEnsName } from "wagmi";
+
 import { AccountDialog } from "../AccountDialog";
 import Button from "../ui/Button";
 import ConnectDialog from "../ConnectDialog";
 import { faEthereum } from "@fortawesome/free-brands-svg-icons";
 import { faWaveSquare } from "@fortawesome/free-solid-svg-icons";
 import { shortenEthAddress } from "../../eth/utils/shortenEthAddress";
-import { useAccount } from "wagmi";
 import { useState } from "react";
 
 export default function EthButton() {
   const { address, isConnected, isConnecting } = useAccount();
   const [connectDialogOpen, setConnectDialogOpen] = useState(false);
   const [accountDialogOpen, setAccountDialogOpen] = useState(false);
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+    chainId: 1,
+  });
 
   const handleClick = () => {
     if (isConnected) {
@@ -35,7 +40,7 @@ export default function EthButton() {
       return "Connecting...";
     }
     if (isConnected) {
-      return shortenEthAddress(address);
+      return ensName ?? shortenEthAddress(address);
     }
     return "Connect";
   };
