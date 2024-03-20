@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2024-03-19
+
+### Changed
+
+- Upgraded `ic-use-siwe-identity` to v0.0.11. 
+  - fix: A state handling bug prevented the promise returned by login() from working on first call to function. 
+
 ## [0.0.4] - 2024-03-19
 
 ### Added 
