@@ -38,7 +38,7 @@ upgrade-provider:
 	)"
 
 deploy-backend:
-	dfx deploy backend --argument "$$(dfx canister id ic_siwe_provider)"
+	dfx deploy backend
 
 deploy-frontend:
 	npm install

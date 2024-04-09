@@ -1,20 +1,21 @@
 {
   "canisters": {
     "ic_siwe_provider": {
+      "candid": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.6/ic_siwe_provider.did",
       "type": "custom",
-      "candid": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.5/ic_siwe_provider.did",
-      "wasm": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.5/ic_siwe_provider.wasm.gz"
+      "wasm": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.6/ic_siwe_provider.wasm.gz"
     },
     "backend": {
       "candid": "src/backend/backend.did",
+      "dependencies": ["ic_siwe_provider"],
       "package": "backend",
       "type": "rust"
     },
     "frontend": {
+      "build": ["npm run build"],
       "dependencies": ["backend", "ic_siwe_provider"],
       "source": ["dist"],
-      "type": "assets",
-      "build": ["npm run build"]
+      "type": "assets"
     }
   },
   "output_env_file": ".env",

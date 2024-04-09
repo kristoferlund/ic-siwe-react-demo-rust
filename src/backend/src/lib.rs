@@ -1,14 +1,13 @@
+mod declarations;
 mod service;
 mod user_profile;
 
-use candid::Principal;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};
 use std::cell::RefCell;
 use user_profile::UserProfile;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
-type GetAddressResponse = Result<String, String>;
 
 thread_local! {
     static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> =
@@ -19,6 +18,4 @@ thread_local! {
             MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(0))),
         )
     );
-
-    static SIWE_PROVIDER_CANISTER: RefCell<Option<Principal>>  = RefCell::new(None);
 }
