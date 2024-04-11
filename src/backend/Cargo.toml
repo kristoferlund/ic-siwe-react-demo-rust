@@ -16,3 +16,4 @@ serde_bytes = "0.11"
 
 [build-dependencies]
 ic-cdk-bindgen = "0.1.3"
+dotenv = "0.15.0"

@@ -1,9 +1,12 @@
+use dotenv::dotenv;
 use ic_cdk_bindgen::{Builder, Config};
 use std::path::PathBuf;
 
 /// This build script generates bindings in the declarations module to simplify interacting
 /// with the deployed ic_siwe_provider canister.
 fn main() {
+    dotenv().ok();
+
     let manifest_dir =
         PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").expect("Cannot find manifest dir"));
     let mut builder = Builder::new();
