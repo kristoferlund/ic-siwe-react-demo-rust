@@ -38,8 +38,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(react@18.3.1)
   ic-use-siwe-identity:
-    specifier: ^0.0.11
-    version: link:../ic-siwe/packages/ic-use-siwe-identity
+    specifier: ^0.0.12
+    version: 0.0.12(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5)
   react:
     specifier: ^18.3.1
     version: 18.3.1
@@ -3178,7 +3178,7 @@ packages:
   /@scure/bip32@1.4.0:
     resolution: {integrity: sha512-sVUpc0Vq3tXCkDGYVWGIZTRfnvu8LoTDaev7vbwh0omSvVORONr960MQWdKqJDCReIEmTj3PAr73O3aoxz7OPg==}
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.7
     dev: false
@@ -5776,6 +5776,28 @@ packages:
       react: 18.3.1
     dev: false
 
+  /ic-use-siwe-identity@0.0.12(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5):
+    resolution: {integrity: sha512-TnvTvQmtxR7e3XZ6gPcY46gcHeY6Q1uWgww3nLFjjKO4CIfCsOFYf+a2Z1DjZnQe7fQZMgaSF2mYc4vxy6hzRA==}
+    peerDependencies:
+      '@dfinity/agent': ^1.4.0
+      '@dfinity/candid': ^1.4.0
+      '@dfinity/identity': ^1.4.0
+      '@dfinity/principal': ^1.4.0
+      react: ^18.3.1
+      react-dom: ^18.3.1
+      viem: ^2.18.0
+      wagmi: ^2.10.0
+    dependencies:
+      '@dfinity/agent': 1.4.0(@dfinity/candid@1.4.0)(@dfinity/principal@1.4.0)
+      '@dfinity/candid': 1.4.0(@dfinity/principal@1.4.0)
+      '@dfinity/identity': 1.4.0(@dfinity/agent@1.4.0)(@dfinity/principal@1.4.0)(@peculiar/webcrypto@1.5.0)
+      '@dfinity/principal': 1.4.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      viem: 2.19.7(typescript@5.5.3)
+      wagmi: 2.12.5(@tanstack/react-query@5.28.4)(@types/react@18.3.3)(react-dom@18.3.1)(react-native@0.75.2)(react@18.3.1)(typescript@5.5.3)(viem@2.19.7)
+    dev: false
+
   /idb-keyval@6.2.1:
     resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
     dev: false
@@ -7276,29 +7298,29 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
-  /postcss-import@15.1.0(postcss@8.4.31):
+  /postcss-import@15.1.0(postcss@8.4.41):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.41
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.31):
+  /postcss-js@4.0.1(postcss@8.4.41):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.31
+      postcss: 8.4.41
     dev: true
 
-  /postcss-load-config@4.0.2(postcss@8.4.31):
+  /postcss-load-config@4.0.2(postcss@8.4.41):
     resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -7311,17 +7333,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.1.2
-      postcss: 8.4.31
+      postcss: 8.4.41
       yaml: 2.5.0
     dev: true
 
-  /postcss-nested@6.2.0(postcss@8.4.31):
+  /postcss-nested@6.2.0(postcss@8.4.41):
     resolution: {integrity: sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.41
       postcss-selector-parser: 6.1.2
     dev: true
 
@@ -8260,11 +8282,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.1
-      postcss: 8.4.31
-      postcss-import: 15.1.0(postcss@8.4.31)
-      postcss-js: 4.0.1(postcss@8.4.31)
-      postcss-load-config: 4.0.2(postcss@8.4.31)
-      postcss-nested: 6.2.0(postcss@8.4.31)
+      postcss: 8.4.41
+      postcss-import: 15.1.0(postcss@8.4.41)
+      postcss-js: 4.0.1(postcss@8.4.41)
+      postcss-load-config: 4.0.2(postcss@8.4.41)
+      postcss-nested: 6.2.0(postcss@8.4.41)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -8755,7 +8777,7 @@ packages:
   /webauthn-p256@0.0.5:
     resolution: {integrity: sha512-drMGNWKdaixZNobeORVIqq7k5DsRC9FnG201K2QjeOoQLmtSDaSsVZdkg6n5jUALJKcAG++zBPJXmv6hy0nWFg==}
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.5.0
       '@noble/hashes': 1.4.0
     dev: false
 
