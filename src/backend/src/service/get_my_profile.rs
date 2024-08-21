@@ -6,9 +6,6 @@ use crate::{user_profile::UserProfile, USER_PROFILES};
 #[query]
 fn get_my_profile() -> Result<UserProfile, String> {
     USER_PROFILES
-        .with(|p| p.borrow().get(&ic_cdk::caller().to_string()))
-        .map_or(
-            Err("No profile found for the given address".to_string()),
-            Ok,
-        )
+        .with_borrow(|p| p.get(&ic_cdk::caller().to_string()))
+        .ok_or("No profile found for the given address".to_string())
 }
