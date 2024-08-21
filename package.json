@@ -23,10 +23,6 @@
   ],
   "type": "module",
   "scripts": {
-    "prebuild": "dfx generate",
-    "deploy:local": "dfx deploy --network=local",
-    "deploy:ic": "dfx deploy --network=ic",
-    "generate": "dfx generate backend",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint ./src/frontend/src",
@@ -69,15 +65,5 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  },
-  "engines": {
-    "node": "^12 || ^14 || ^16 || >=17",
-    "npm": "^7.17 || >=8"
-  },
-  "browserslist": [
-    "last 2 chrome version",
-    "last 2 firefox version",
-    "last 2 safari version",
-    "last 2 edge version"
-  ]
+  }
 }
