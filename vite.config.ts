@@ -12,6 +12,9 @@ const processEnvCanisterIds = Object.fromEntries(
 );
 
 export default defineConfig({
+  build: {
+    outDir: "../../dist",
+  },
   plugins: [react()],
   root: "src/frontend",
   server: {
