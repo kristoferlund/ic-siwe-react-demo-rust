@@ -1,5 +1,7 @@
 create-canisters:
 	dfx canister create --all
+	dfx generate backend
+	dfx generate ic_siwe_provider
 
 deploy-provider:
 	dfx deploy ic_siwe_provider --argument "( \
