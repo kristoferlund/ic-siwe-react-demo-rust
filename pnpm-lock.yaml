@@ -38,8 +38,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(react@18.3.1)
   ic-use-siwe-identity:
-    specifier: ^0.0.12
-    version: 0.0.12(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5)
+    specifier: ^0.0.13
+    version: 0.0.13(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5)
   react:
     specifier: ^18.3.1
     version: 18.3.1
@@ -5776,8 +5776,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /ic-use-siwe-identity@0.0.12(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5):
-    resolution: {integrity: sha512-TnvTvQmtxR7e3XZ6gPcY46gcHeY6Q1uWgww3nLFjjKO4CIfCsOFYf+a2Z1DjZnQe7fQZMgaSF2mYc4vxy6hzRA==}
+  /ic-use-siwe-identity@0.0.13(@dfinity/agent@1.4.0)(@dfinity/candid@1.4.0)(@dfinity/identity@1.4.0)(@dfinity/principal@1.4.0)(react-dom@18.3.1)(react@18.3.1)(viem@2.19.7)(wagmi@2.12.5):
+    resolution: {integrity: sha512-47XnWfwDUr15N2CZ14/MO+piBjsJmI11ziheHr8EMYiAUgcvoevs2IZEUHCazHaOKc9jkKr/z2O77nFJwXUOyA==}
     peerDependencies:
       '@dfinity/agent': ^1.4.0
       '@dfinity/candid': ^1.4.0
