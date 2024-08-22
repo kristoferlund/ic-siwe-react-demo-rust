@@ -1,5 +1,7 @@
 create-canisters:
 	dfx canister create --all
+	dfx generate backend
+	dfx generate ic_siwe_provider
 
 deploy-provider:
 	dfx deploy ic_siwe_provider --argument "( \
@@ -41,14 +43,14 @@ deploy-backend:
 	dfx deploy backend
 
 deploy-frontend:
-	npm install
+	pnpm install
 	dfx deploy frontend
 
 deploy-all: create-canisters deploy-provider deploy-backend deploy-frontend
 
 run-frontend:
-	npm install
-	npm run dev
+	pnpm install
+	pnpm run dev
 
 clean:
 	rm -rf .dfx

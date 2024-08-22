@@ -12,12 +12,11 @@ const processEnvCanisterIds = Object.fromEntries(
 );
 
 export default defineConfig({
-  plugins: [react()],
-  root: "src/frontend",
   build: {
-    target: "es2020",
     outDir: "../../dist",
   },
+  plugins: [react()],
+  root: "src/frontend",
   server: {
     host: "127.0.0.1",
     proxy: {
