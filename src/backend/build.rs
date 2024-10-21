@@ -16,10 +16,12 @@ fn main() {
 
     let ic_siwe_provider_did_str = ic_siwe_provider_did_path.to_str().expect("Path invalid");
 
-    env::set_var(
-        "CANISTER_CANDID_PATH_IC_SIWE_PROVIDER",
-        ic_siwe_provider_did_str,
-    );
+    unsafe {
+        env::set_var(
+            "CANISTER_CANDID_PATH_IC_SIWE_PROVIDER",
+            ic_siwe_provider_did_str,
+        )
+    };
 
     let mut builder = Builder::new();
 
