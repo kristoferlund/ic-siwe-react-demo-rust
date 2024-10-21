@@ -7,10 +7,10 @@ import {
   createUseActorHook,
   isIdentityExpiredError,
 } from "ic-use-actor";
-import { canisterId, idlFactory } from "../../../declarations/backend/index";
+import { canisterId, idlFactory } from "../../../backend/declarations/index";
 
 import { ReactNode } from "react";
-import { _SERVICE } from "../../../declarations/backend/backend.did";
+import { _SERVICE } from "../../../backend/declarations/backend.did";
 import toast from "react-hot-toast";
 import { useSiweIdentity } from "ic-use-siwe-identity";
 

@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   canisterId,
   idlFactory,
-} from "../../declarations/ic_siwe_provider/index";
+} from "../../ic_siwe_provider/declarations/index";
 
 import Actors from "./ic/Actors.tsx";
 import App from "./App.tsx";
@@ -14,7 +14,7 @@ import ReactDOM from "react-dom/client";
 import { SiweIdentityProvider } from "ic-use-siwe-identity";
 import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
-import { _SERVICE } from "../../declarations/ic_siwe_provider/ic_siwe_provider.did";
+import { _SERVICE } from "../../ic_siwe_provider/declarations/ic_siwe_provider.did";
 import { wagmiConfig } from "./wagmi/wagmi.config.ts";
 
 const queryClient = new QueryClient();

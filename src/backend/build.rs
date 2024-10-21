@@ -12,7 +12,7 @@ fn main() {
         PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").expect("Cannot find manifest dir"));
 
     let ic_siwe_provider_did_path =
-        manifest_dir.join("../declarations/ic_siwe_provider/ic_siwe_provider.did");
+        manifest_dir.join("../ic_siwe_provider/declarations/ic_siwe_provider.did");
 
     let ic_siwe_provider_did_str = ic_siwe_provider_did_path.to_str().expect("Path invalid");
 

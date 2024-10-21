@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileCard from "./ProfileCard";
-import { UserProfile } from "../../../../declarations/backend/backend.did";
+import { UserProfile } from "../../../../backend/declarations/backend.did";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { useActor } from "../../ic/Actors";
 
