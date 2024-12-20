@@ -1,7 +1,5 @@
 create-canisters:
 	dfx canister create --all
-	dfx generate backend
-	dfx generate ic_siwe_provider
 
 deploy-provider:
 	dfx deploy ic_siwe_provider --argument "( \
@@ -20,6 +18,7 @@ deploy-provider:
 	        }; \
 	    } \
 	)"
+	dfx generate ic_siwe_provider
 
 upgrade-provider:
 	dfx canister install ic_siwe_provider --mode upgrade --upgrade-unchanged --argument "( \
@@ -38,9 +37,11 @@ upgrade-provider:
 	        }; \
 	    } \
 	)"
+	dfx generate ic_siwe_provider
 
 deploy-backend:
 	dfx deploy backend
+	dfx generate backend
 
 deploy-frontend:
 	pnpm install

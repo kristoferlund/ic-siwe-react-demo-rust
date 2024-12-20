@@ -1,0 +1,29 @@
+type Name = text;
+type AvatarUrl = text;
+
+type UserProfile = record {
+  address : text;
+  name : text;
+  avatar_url : text;
+};
+
+type GetMyProfileResponse = variant {
+  Ok : UserProfile;
+  Err : text;
+};
+
+type SaveMyProfileResponse = variant {
+  Ok : UserProfile;
+  Err : text;
+};
+
+type ListProfilesResponse = variant {
+  Ok : vec record { text; UserProfile };
+  Err : text;
+};
+
+service : () -> {
+  "get_my_profile" : () -> (GetMyProfileResponse) query;
+  "save_my_profile" : (Name, AvatarUrl) -> (SaveMyProfileResponse);
+  "list_profiles" : () -> (ListProfilesResponse) query;
+};
