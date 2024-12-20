@@ -21,7 +21,7 @@ This React demo application and template demonstrates how to login Ethereum user
 
 The goal of the [ic-siwe](https://github.com/kristoferlund/ic-siwe) project is to enhance the interoperability between Ethereum and the Internet Computer platform, enabling developers to build applications that leverage the strengths of both platforms.
 
-## 👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
+## 👀 Try the live demo: <https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io>
 
 ## Key features
 
@@ -104,8 +104,8 @@ The `ic_siwe_provider` canister is pre-built and added to the project as a depen
   "canisters": {
     "ic_siwe_provider": {
       "type": "custom",
-      "candid": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.5/ic_siwe_provider.did",
-      "wasm": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.0.5/ic_siwe_provider.wasm.gz"
+      "candid": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.1.1/ic_siwe_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siwe/releases/download/v0.1.1/ic_siwe_provider.wasm.gz"
     },
     ...
   },
