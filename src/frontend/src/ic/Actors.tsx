@@ -12,7 +12,7 @@ import { canisterId, idlFactory } from "../../../backend/declarations/index";
 import { ReactNode } from "react";
 import { _SERVICE } from "../../../backend/declarations/backend.did";
 import toast from "react-hot-toast";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 const actorContext = createActorContext<_SERVICE>();
 export const useActor = createUseActorHook<_SERVICE>(actorContext);

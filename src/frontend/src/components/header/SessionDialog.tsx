@@ -2,7 +2,7 @@ import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import EditProfile from "../profile/EditProfile";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 type SessionDialogProps = {
   isOpen: boolean;
@@ -12,7 +12,7 @@ type SessionDialogProps = {
 function arrayBufferToHex(arrayBuffer: ArrayBuffer): string {
   const byteArray = new Uint8Array(arrayBuffer);
   return Array.from(byteArray, (byte) =>
-    byte.toString(16).padStart(2, "0")
+    byte.toString(16).padStart(2, "0"),
   ).join("");
 }
 
@@ -32,7 +32,7 @@ export default function SessionDialog({
           {delegationChain?.delegations.map((delegation) => {
             const pubKey = arrayBufferToHex(delegation.delegation.pubkey);
             const expiration = new Date(
-              Number(delegation.delegation.expiration / 1000000n)
+              Number(delegation.delegation.expiration / 1000000n),
             );
             return (
               <div key={pubKey}>

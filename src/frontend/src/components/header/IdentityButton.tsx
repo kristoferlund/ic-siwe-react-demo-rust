@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import PrincipalDialog from "./PrincipalDialog";
 import { useAccount } from "wagmi";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 import { useState } from "react";
 
 export default function IdentityButton() {

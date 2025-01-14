@@ -3,7 +3,7 @@ import { useAccount, useChainId } from "wagmi";
 import Button from "../ui/Button";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { isChainIdSupported } from "../../wagmi/is-chain-id-supported";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 export default function LoginButton() {
   const { isConnected } = useAccount();

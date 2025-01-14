@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import { Dialog as HeadlessDialog } from "@headlessui/react";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 export default function PrincipalDialog({
   isOpen,

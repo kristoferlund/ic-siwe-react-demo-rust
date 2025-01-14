@@ -4,7 +4,7 @@ import { useActor } from "../../ic/Actors";
 import { useAccount } from "wagmi";
 import AddressPill from "../AddressPill";
 import PrincipalPill from "../PrincipalPill";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftRight } from "@fortawesome/free-solid-svg-icons";
 

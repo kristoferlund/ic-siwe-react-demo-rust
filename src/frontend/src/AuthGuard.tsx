@@ -3,7 +3,7 @@ import { useAccount, useChainId } from "wagmi";
 
 import LoginPage from "./components/login/LoginPage";
 import { isChainIdSupported } from "./wagmi/is-chain-id-supported";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 type AuthGuardProps = {
   children: React.ReactNode;

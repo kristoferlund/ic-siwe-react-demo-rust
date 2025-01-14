@@ -188,7 +188,7 @@ To initiate the login flow, the `login` function is called on the Use the `useSi
 ```jsx
 // LoginButton.tsx
 
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 
 function LoginButton() {
   const { login, clear, identity, ... } = useSiweIdentity();

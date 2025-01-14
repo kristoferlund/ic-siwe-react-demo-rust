@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useChainId } from "wagmi";
 import { useEffect } from "react";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiweIdentity } from "ic-use-siwe-identity/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function LoginPage(): React.ReactElement {
