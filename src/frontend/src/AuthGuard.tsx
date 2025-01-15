@@ -3,7 +3,7 @@ import { useAccount, useChainId } from "wagmi";
 
 import LoginPage from "./components/login/LoginPage";
 import { isChainIdSupported } from "./wagmi/is-chain-id-supported";
-import { useSiweIdentity } from "ic-use-siwe-identity/react";
+import { useSiwe } from "ic-siwe-js/react";
 
 type AuthGuardProps = {
   children: React.ReactNode;
@@ -12,8 +12,7 @@ type AuthGuardProps = {
 export default function AuthGuard({ children }: AuthGuardProps) {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
-  const { clear, isInitializing, identity, identityAddress } =
-    useSiweIdentity();
+  const { clear, isInitializing, identity, identityAddress } = useSiwe();
 
   // If the user is not connected, clear the session.
   useEffect(() => {

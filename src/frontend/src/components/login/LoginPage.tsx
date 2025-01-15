@@ -8,14 +8,14 @@ import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useChainId } from "wagmi";
 import { useEffect } from "react";
-import { useSiweIdentity } from "ic-use-siwe-identity/react";
+import { useSiwe } from "ic-siwe-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
   const { prepareLogin, isPrepareLoginIdle, prepareLoginError, loginError } =
-    useSiweIdentity();
+    useSiwe();
 
   /**
    * Preload a Siwe message on every address change.

@@ -7,7 +7,7 @@ import App from "./App.tsx";
 import AuthGuard from "./AuthGuard.tsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { SiweIdentityProvider } from "ic-use-siwe-identity/react";
+import { SiweIdentityProvider } from "ic-siwe-js/react";
 import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
 import { wagmiConfig } from "./wagmi/wagmi.config.ts";

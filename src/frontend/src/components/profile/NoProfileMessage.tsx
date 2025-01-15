@@ -4,14 +4,14 @@ import { useActor } from "../../ic/Actors";
 import { useAccount } from "wagmi";
 import AddressPill from "../AddressPill";
 import PrincipalPill from "../PrincipalPill";
-import { useSiweIdentity } from "ic-use-siwe-identity/react";
+import { useSiwe } from "ic-siwe-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftRight } from "@fortawesome/free-solid-svg-icons";
 
 export function NoProfileMessage() {
   const { actor } = useActor();
   const { address } = useAccount();
-  const { identity } = useSiweIdentity();
+  const { identity } = useSiwe();
 
   // Local state
   const [hasProfile, setHasProfile] = useState(true);

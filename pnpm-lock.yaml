@@ -41,12 +41,12 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.28.4
         version: 5.28.4(react@18.3.1)
+      ic-siwe-js:
+        specifier: ^0.2.0
+        version: 0.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/identity@2.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10))
       ic-use-actor:
         specifier: ^0.1.0
         version: 0.1.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(react@18.3.1)
-      ic-use-siwe-identity:
-        specifier: ^0.1.2
-        version: 0.1.2(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/identity@2.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10))(wagmi@2.12.5(@tanstack/query-core@5.28.4)(@tanstack/react-query@5.28.4(react@18.3.1))(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.21.0)(typescript@5.5.3)(utf-8-validate@5.0.10)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10)))
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1862,6 +1862,17 @@ packages:
   '@walletconnect/window-metadata@1.0.1':
     resolution: {integrity: sha512-9koTqyGrM2cqFRW517BPY/iEtUDx2r1+Pwwu5m7sJ7ka79wi3EyqhqcICk/yDmv6jAS1rjKgTKXlEhanYjijcA==}
 
+  '@xstate/store@2.6.2':
+    resolution: {integrity: sha512-zznGTWU+tmhbD0UUxPLy5FmxvceBNyMsN1Tuy7UMJAH9NuaQWj4/B2L+EcO6FxI2b2CNyzk1PL5mZ8cDpBFpMw==}
+    peerDependencies:
+      react: ^18.2.0 || ^19.0.0-0
+      solid-js: ^1.7.6
+    peerDependenciesMeta:
+      react:
+        optional: true
+      solid-js:
+        optional: true
+
   abitype@1.0.5:
     resolution: {integrity: sha512-YzDhti7cjlfaBhHutMaboYB21Ha3rXR9QTkNJFzYC4kC8YclaiwPBBBJY8ejFdu2wnJeZCVZSMlQJ7fi8S6hsw==}
     peerDependencies:
@@ -2833,24 +2844,28 @@ packages:
   i18next@23.11.5:
     resolution: {integrity: sha512-41pvpVbW9rhZPk5xjCX2TPJi2861LEig/YRhUkY+1FQ2IQPS0bKUDYnEqY8XPPbB48h1uIwLnP9iiEfuSl20CA==}
 
+  ic-siwe-js@0.2.0:
+    resolution: {integrity: sha512-mU2+OFjtfFf72IdGEOReUP+aMKugfRmtRbFIe/WSH/zJtVOT7BGkh8iu/PfLOQ7wNxFF+rikW1IRXRJC+iQRyA==}
+    peerDependencies:
+      '@dfinity/agent': '>=2.1.2'
+      '@dfinity/candid': '>=2.1.1'
+      '@dfinity/identity': '>=2.1.2'
+      '@dfinity/principal': '>=2.1.2'
+      react: ^18.3.1
+      react-dom: ^18.3.1
+      viem: ^2.22.7
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   ic-use-actor@0.1.0:
     resolution: {integrity: sha512-Q2umozofJDYAZf8apfgKj432PRBpQ1BN03KNtO3uafAxTJJKDCwXj8gq3ijpMUV4IBgLB0plt5nJqqpxYKMqmA==}
     peerDependencies:
       '@dfinity/agent': '>=2.1.2'
       '@dfinity/candid': '>=2.1.2'
       react: '>=18.0.0'
-
-  ic-use-siwe-identity@0.1.2:
-    resolution: {integrity: sha512-LCsvCXWVwplekvrDDDR3f6r7ZkNUAmkc44yyzYqu7ukOBEiwmKnHlkWfVMT1clSIvfzoucDAew19vrD4nif3Lg==}
-    peerDependencies:
-      '@dfinity/agent': '>=1.4.0'
-      '@dfinity/candid': '>=1.4.0'
-      '@dfinity/identity': '>=1.4.0'
-      '@dfinity/principal': '>=1.4.0'
-      react: ^18.3.1
-      react-dom: ^18.3.1
-      viem: ^2.18.0
-      wagmi: ^2.10.0
 
   idb-keyval@6.2.1:
     resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
@@ -7179,6 +7194,10 @@ snapshots:
       '@walletconnect/window-getters': 1.0.1
       tslib: 1.14.1
 
+  '@xstate/store@2.6.2(react@18.3.1)':
+    optionalDependencies:
+      react: 18.3.1
+
   abitype@1.0.5(typescript@5.5.3):
     optionalDependencies:
       typescript: 5.5.3
@@ -8205,22 +8224,25 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.25.0
 
-  ic-use-actor@0.1.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(react@18.3.1):
-    dependencies:
-      '@dfinity/agent': 2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)
-      '@dfinity/candid': 2.2.0(@dfinity/principal@2.2.0)
-      react: 18.3.1
-
-  ic-use-siwe-identity@0.1.2(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/identity@2.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10))(wagmi@2.12.5(@tanstack/query-core@5.28.4)(@tanstack/react-query@5.28.4(react@18.3.1))(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.21.0)(typescript@5.5.3)(utf-8-validate@5.0.10)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10))):
+  ic-siwe-js@0.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/identity@2.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10)):
     dependencies:
       '@dfinity/agent': 2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)
       '@dfinity/candid': 2.2.0(@dfinity/principal@2.2.0)
       '@dfinity/identity': 2.2.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)
       '@dfinity/principal': 2.2.0
+      '@xstate/store': 2.6.2(react@18.3.1)
+      viem: 2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10)
+    optionalDependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      viem: 2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10)
-      wagmi: 2.12.5(@tanstack/query-core@5.28.4)(@tanstack/react-query@5.28.4(react@18.3.1))(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.21.0)(typescript@5.5.3)(utf-8-validate@5.0.10)(viem@2.19.7(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@5.0.10))
+    transitivePeerDependencies:
+      - solid-js
+
+  ic-use-actor@0.1.0(@dfinity/agent@2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0))(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(react@18.3.1):
+    dependencies:
+      '@dfinity/agent': 2.2.0(@dfinity/candid@2.2.0(@dfinity/principal@2.2.0))(@dfinity/principal@2.2.0)
+      '@dfinity/candid': 2.2.0(@dfinity/principal@2.2.0)
+      react: 18.3.1
 
   idb-keyval@6.2.1: {}
 
