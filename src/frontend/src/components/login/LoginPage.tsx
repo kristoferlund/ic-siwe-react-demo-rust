@@ -8,33 +8,13 @@ import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useChainId } from "wagmi";
 import { useEffect } from "react";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiwe } from "ic-siwe-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function LoginPage(): React.ReactElement {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
-  const { prepareLogin, isPrepareLoginIdle, prepareLoginError, loginError } =
-    useSiweIdentity();
-
-  /**
-   * Preload a Siwe message on every address change.
-   */
-  useEffect(() => {
-    if (!isPrepareLoginIdle || !isConnected || !address) return;
-    prepareLogin();
-  }, [isConnected, address, prepareLogin, isPrepareLoginIdle]);
-
-  /**
-   * Show an error toast if the prepareLogin() call fails.
-   */
-  useEffect(() => {
-    if (prepareLoginError) {
-      toast.error(prepareLoginError.message, {
-        position: "bottom-right",
-      });
-    }
-  }, [prepareLoginError]);
+  const { loginError } = useSiwe();
 
   /**
    * Show an error toast if the login call fails.

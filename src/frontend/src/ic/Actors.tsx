@@ -12,13 +12,13 @@ import { canisterId, idlFactory } from "../../../backend/declarations/index";
 import { ReactNode } from "react";
 import { _SERVICE } from "../../../backend/declarations/backend.did";
 import toast from "react-hot-toast";
-import { useSiweIdentity } from "ic-use-siwe-identity";
+import { useSiwe } from "ic-siwe-js/react";
 
 const actorContext = createActorContext<_SERVICE>();
 export const useActor = createUseActorHook<_SERVICE>(actorContext);
 
 export default function Actors({ children }: { children: ReactNode }) {
-  const { identity, clear } = useSiweIdentity();
+  const { identity, clear } = useSiwe();
 
   const errorToast = (error: unknown) => {
     if (typeof error === "object" && error !== null && "message" in error) {
